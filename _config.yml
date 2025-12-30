@@ -1,3 +1,7 @@
 theme: jekyll-theme-minimal
 title: TEST_Page
 description: Project Portfolio
+
+collections:
+  projects:
+    output: true 
