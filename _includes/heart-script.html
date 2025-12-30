@@ -1,6 +1,7 @@
 <script>
     const GAS_URL =
         'https://script.google.com/macros/s/AKfycbzIex3Sdy37cyePa8FWlxWNQVVgC2dRvgD6up8qADnbh-VB5r4WK60xZWxTmuQCPZ0B/exec';
+    let clickStacks = {};
     let pendingRequests = {};
 
     window.handleHeartClick = function (btn, id) {
@@ -10,6 +11,8 @@
         let currentCount = parseInt(countSpan.innerText) || 0;
         countSpan.innerText = currentCount + 1;
 
+        clickStacks[id] = (clickStacks[id] || 0) + 1;
+
         btn.style.transform = "scale(1.5)";
         setTimeout(() => {
             btn.style.transform = "scale(1)";
@@ -18,7 +21,10 @@
         if (pendingRequests[id]) clearTimeout(pendingRequests[id]);
 
         pendingRequests[id] = setTimeout(() => {
-            fetch(`${GAS_URL}?action=add&id=${id}`, {
+            const addedCount = clickStacks[id];
+            clickStacks[id] = 0;
+
+            fetch(`${GAS_URL}?action=add&id=${id}&inc=${addedCount}`, {
                     method: 'GET',
                     redirect: 'follow'
                 })
@@ -26,7 +32,7 @@
                 .then(newCount => {
                     if (newCount) countSpan.innerText = newCount;
                 });
-        }, 500);
+        }, 800);
     };
 
     document.addEventListener("DOMContentLoaded", function () {
@@ -49,27 +55,13 @@
 
         const searchInput = document.getElementById('projectSearchInput');
         const cards = document.querySelectorAll('.project-card');
-        const emptyMessage = document.getElementById('emptyResultMessage');
-
         if (searchInput) {
             searchInput.addEventListener('input', function (e) {
                 const searchTerm = e.target.value.toLowerCase().replace(/\s+/g, '');
-                let visibleCount = 0;
-
                 cards.forEach(card => {
                     const title = card.getAttribute('data-search-title') || "";
-                    if (title.includes(searchTerm)) {
-                        card.style.display = 'flex';
-                        visibleCount++;
-                    } else {
-                        card.style.display = 'none';
-                    }
+                    card.style.display = title.includes(searchTerm) ? 'flex' : 'none';
                 });
-
-                if (emptyMessage) {
-                    emptyMessage.style.display = (visibleCount === 0 && searchTerm !== "") ? 'block' :
-                        'none';
-                }
             });
         }
     });
