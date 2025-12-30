@@ -3,7 +3,9 @@
     .header,
     #header,
     .masthead,
-    .sidebar {
+    #title,
+    h1#project_title,
+    #main_content h1:first-child {
         display: none !important;
     }
 
@@ -62,7 +64,7 @@
         animation: spin 1s linear infinite;
     }
 
-  @keyframes spin {
+@keyframes spin {
     to { transform: rotate(360deg); }
   }
 
