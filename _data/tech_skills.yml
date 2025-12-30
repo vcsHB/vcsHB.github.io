@@ -4,13 +4,13 @@
   icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/unity/unity-original.svg"
 - name: C#
   level: 85
-  color: "#239120"
+  color: "#6423cc"
   icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg"
-- name: C#
-  level: 85
-  color: "#239120"
-  icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg"
-- name: C#
-  level: 85
-  color: "#239120"
-  icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg"
+- name: C++
+  level: 57
+  color: "#478fed"
+  icon: "https://upload.wikimedia.org/wikipedia/commons/thu…_C%2B%2B_Logo.svg/1822px-ISO_C%2B%2B_Logo.svg.png"
+- name: JavaScript
+  level: 63
+  color: "#f7d83b"
+  icon: "https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png"
