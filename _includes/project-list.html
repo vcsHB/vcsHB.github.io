@@ -24,17 +24,26 @@
             <h3 style="margin-top: 30px;">기술 역량</h3>
             <div class="skill-gauges">
                 {% for skill in site.data.tech_skills %}
+                {% assign circumference = 282.7 %}
+                {% assign offset = circumference | times: skill.level | divided_by: 100 %}
+                {% assign final_offset = circumference | minus: offset %}
+
                 <div class="gauge-item">
-                    <svg class="progress-ring" width="80" height="80">
-                        <circle stroke="#f0f0f0" stroke-width="6" fill="transparent" r="34" cx="40" cy="40" />
+                    <svg class="progress-ring" width="120" height="120">
+                        <circle stroke="#f0f0f0" stroke-width="8" fill="transparent" r="45" cx="60" cy="60" />
                         <circle class="progress-ring-circle"
                             stroke="{{ skill.color | default: '#0366d6' }}"
-                            stroke-width="6" fill="transparent" r="34" cx="40" cy="40"
-                            style="stroke-dasharray: 213.6; stroke-dashoffset: {{ 213.6 | minus: (213.6 | times: skill.level | divided_by: 100) }}" />
+                            stroke-width="8" fill="transparent" r="45" cx="60" cy="60"
+                            style="stroke-dasharray: {{ circumference }}; stroke-dashoffset: {{ final_offset }};" />
                     </svg>
-                    <div class="gauge-text">
-                        <small>Level</small>
-                        <span>{{ skill.level }}</span>
+
+                    <div class="gauge-inner-content">
+                        <img src="{{ skill.icon }}" class="gauge-logo">
+                        <div class="gauge-overlay"></div>
+                        <div class="gauge-text-box">
+                            <small>Level</small>
+                            <span>{{ skill.level }}</span>
+                        </div>
                     </div>
                     <div class="gauge-label">{{ skill.name }}</div>
                 </div>
@@ -50,7 +59,7 @@
                     </div>
                     {% endfor %}
                 </div>
-            </div> 
+            </div>
             {% endcomment %}
         </div>
     </div>
