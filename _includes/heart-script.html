@@ -1,34 +1,32 @@
 <script>
-  const GAS_URL = 'https://script.google.com/macros/s/AKfycbzojJs3Kmetk8BeVVFNmuAWzKTckuQyEIiptjZCiq37D9M31JgZEYKtZ-8PV7zWpPhi/exec';
+    const GAS_URL =
+        'https://script.google.com/macros/s/AKfycbwf2_09aDOhr0cmRTu3fwpUa8WZlRQ6ffaHWaMH4zJZI5LteE_Kho-jnNXne179lwo/exec';
 
-  window.handleHeartClick = function(btn, id) {
-    const countSpan = btn.querySelector('.heart-count');
-    if (!btn || btn.style.pointerEvents === 'none') return;
+    window.handleHeartClick = function (btn, id) {
+        const countSpan = btn.querySelector('.heart-count');
+        if (!btn || btn.style.pointerEvents === 'none') return;
 
-    btn.style.pointerEvents = 'none'; 
+        btn.style.pointerEvents = 'none';
 
-    fetch(`${GAS_URL}?action=add&id=${id}`)
-      .then(res => res.text())
-      .then(newCount => {
-        countSpan.innerText = newCount;
-        btn.style.transform = "scale(1.3)";
-        setTimeout(() => {
-          btn.style.transform = "scale(1)";
-          btn.style.pointerEvents = 'auto';
-        }, 200);
-      })
-      .catch(err => {
-        console.error("Heart Error:", err);
-        btn.style.pointerEvents = 'auto';
-      });
-  };
+        fetch(`${GAS_URL}?action=get&id=${id}`, {
+                method: 'GET',
+                redirect: 'follow'
+            })
+            .then(res => res.text())
+            .then(count => {
+                if (count) span.innerText = count;
+            })
+            .catch(err => console.error("CORS or Network Error:", err));
+    };
 
-  document.addEventListener("DOMContentLoaded", function() {
-    document.querySelectorAll('.heart-count').forEach(span => {
-      const id = span.id.replace('count-', '');
-      fetch(`${GAS_URL}?action=get&id=${id}`)
-        .then(res => res.text())
-        .then(count => { if(count) span.innerText = count; });
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll('.heart-count').forEach(span => {
+            const id = span.id.replace('count-', '');
+            fetch(`${GAS_URL}?action=get&id=${id}`)
+                .then(res => res.text())
+                .then(count => {
+                    if (count) span.innerText = count;
+                });
+        });
     });
-  });
 </script>
