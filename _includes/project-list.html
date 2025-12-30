@@ -37,9 +37,12 @@
     </div>
     <div id="projectList">
         {% for item in site.projects %}
+
         <div class="project-card row"
             data-title="{{ item.title | downcase | replace: ' ', '' }}"
-            onclick="openModal('{{ item.title | slugify }}', `{{ item.content | escape }}`)">
+            onclick="openModal(this)">
+            <script class="project-content-raw" type="text/template">{{ item.content }}</script>
+
             <div class="thumbnail-container">
                 <img src="{{ item.thumbnail }}">
             </div>

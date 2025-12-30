@@ -6,12 +6,14 @@
     function openModal(cardElement) {
         const modal = document.getElementById("portfolioModal");
         const modalBody = document.getElementById("modalBody");
-        const markdown = cardElement.querySelector('.project-markdown-content').innerHTML;
+        if (!cardElement || !modal || !modalBody) return;
+
+        const rawContent = cardElement.querySelector('.project-content-raw').innerHTML;
 
         modal.style.display = "block";
         document.body.style.overflow = "hidden";
 
-        modalBody.innerHTML = marked.parse(markdown);
+        modalBody.innerHTML = marked.parse(rawContent);
         Prism.highlightAll();
     }
 
