@@ -270,4 +270,17 @@
         cursor: pointer;
         color: #aaa;
     }
+
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+    
+    @keyframes fadeIn { 
+        from { opacity: 0; } to { opacity: 1; } 
+    }
+
+    @media (max-width: 768px) {
+    .profile-container { flex-direction: column; align-items: center; }
+    .github-profile-card { width: 100%; max-width: 100%; }
+  }
 </style>
