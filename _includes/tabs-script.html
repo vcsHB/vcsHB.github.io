@@ -22,7 +22,7 @@
         const container = document.querySelector('.github-profile-readme');
         if (!container || container.innerHTML.trim() !== "") return;
 
-        fetch('/_data/profile.md')
+        fetch('/assets/profile.md')
             .then(response => {
                 if (!response.ok) throw new Error('404');
                 return response.text();
