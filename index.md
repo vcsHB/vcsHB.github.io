@@ -11,6 +11,10 @@ TEST
 
 {% include footer.html %}
 
+{% include tabs-script.html %}
+
 {% include searching-script.html %}
 
 {% include heart-script.html %}
+
+{% include modal-script.html %}

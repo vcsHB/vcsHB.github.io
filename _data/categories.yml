@@ -1,5 +1,5 @@
 - id: Unity
-  name: "Game developed with Unity"
+  name: "Unity"
   color: "#3498db"
 - id: Asset
   name: "Assets"
@@ -7,3 +7,13 @@
 - id: Award
   name: "Awards"
   color: "#9b59b6"
+- id: GIGDC
+  name: "GIGDC"
+  color: "#9b59b6"
+- id: PlayX4
+  name: "PlayX4"
+  color: "#9b59b6"
+- id: BIC
+  name: "BIC"
+  color: "#9b59b6"
+  
