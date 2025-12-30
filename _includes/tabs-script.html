@@ -1,3 +1,6 @@
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+
 <script>
     function openTab(evt, tabName) {
         const tabcontents = document.getElementsByClassName("tab-content");
@@ -19,8 +22,10 @@
     }
 
     function loadProfileReadme() {
-        const container = document.querySelector('.github-profile-readme');
-        if (!container || container.innerHTML.trim() !== "") return;
+        const readmeContentContainer = document.getElementById('profileReadmeContent');
+        const readmeMainContainer = document.querySelector('.github-profile-readme');
+
+        if (!readmeContentContainer || readmeContentContainer.innerHTML.trim() !== "") return;
 
         fetch('/assets/profile.md')
             .then(response => {
@@ -29,13 +34,13 @@
             })
             .then(markdown => {
                 if (window.marked) {
-                    container.innerHTML = marked.parse(markdown);
+                    readmeContentContainer.innerHTML = marked.parse(markdown);
                     if (window.Prism) Prism.highlightAll();
-                    setTimeout(() => container.classList.add('active'), 50);
+                    setTimeout(() => readmeMainContainer.classList.add('active'), 50);
                 }
             })
             .catch(() => {
-                container.innerHTML = '<p>README를 불러올 수 없습니다. (_data/profile.md 파일을 확인하세요)</p>';
+                readmeContentContainer.innerHTML = '<p>README를 불러올 수 없습니다. (/assets/profile.md 파일을 확인하세요)</p>';
             });
     }
 

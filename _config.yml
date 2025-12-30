@@ -3,3 +3,4 @@ google_analytics:
 collections:
   projects:
     output: true 
+tech_skills_path: "_data/tech_skills.yml"

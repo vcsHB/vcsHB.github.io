@@ -6,6 +6,7 @@
 
 <div id="Profile" class="tab-content active">
     <div class="profile-container">
+
         <div class="github-profile-card">
             <img src="https://github.com/vcsHB.png" class="profile-avatar">
             <h2 style="margin: 0;">vcs</h2>
@@ -16,10 +17,43 @@
                 <p>🔗 <a href="https://github.com/vcsHB" target="_blank">github.com/vcsHB</a></p>
             </div>
         </div>
+
         <div class="github-profile-readme">
+            <div id="profileReadmeContent"></div>
+
+            <h3 style="margin-top: 30px;">기술 역량</h3>
+            <div class="skill-gauges">
+                {% for skill in site.data.tech_skills %}
+                <div class="gauge-item">
+                    <svg class="progress-ring" width="80" height="80">
+                        <circle stroke="#eee" stroke-width="6" fill="transparent" r="34" cx="40" cy="40" />
+                        <circle class="progress-ring-circle" stroke-width="6" stroke-linecap="round" fill="transparent"
+                            r="34" cx="40" cy="40"
+                            style="stroke-dasharray: 213.6; stroke-dashoffset: {{ 213.6 | minus: (213.6 | times: skill.level | divided_by: 100) }}" />
+                    </svg>
+                    <div class="gauge-text">{{ skill.level }}%</div>
+                    <div class="gauge-label">{{ skill.name }}</div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <h3 style="margin-top: 30px;">기술 스택</h3>
+            <div class="tech-slider">
+                <div class="tech-track">
+                    {% for i in (1..2) %}
+                    {% for skill in site.data.tech_skills %}
+                    <div class="tech-item">
+                        <img src="{{ skill.icon }}" alt="{{ skill.name }}">
+                        <span style="font-size: 12px; color: #666;">{{ skill.name }}</span>
+                    </div>
+                    {% endfor %}
+                    {% endfor %}
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
 <div id="History" class="tab-content">
     <div class="history-list">
         {% for item in site.data.history %}
