@@ -22,7 +22,7 @@
     }
 
     .heart-container button {
-        transition: transform 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        transition: transform 0.2s;
         background: none;
         border: none;
         font-size: 22px;
@@ -30,12 +30,12 @@
         display: flex;
         align-items: center;
         gap: 8px;
-        padding: 5px 10px;
-        border-radius: 10px;
+        outline: none;
     }
 
-    .heart-container button:active {
-        transform: scale(1.4) !important;
+    .heart-container button:disabled {
+        cursor: default;
+        opacity: 0.7;
     }
 
     .loading-spinner {
