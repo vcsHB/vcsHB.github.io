@@ -11,4 +11,6 @@ TEST
 
 {% include footer.html %}
 
+{% include searching-script.html %}
+
 {% include heart-script.html %}
