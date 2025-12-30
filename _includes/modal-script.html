@@ -3,12 +3,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
 
 <script>
-    function openModal(title, content) {
+    function openProjectModal(cardElement) {
         const modal = document.getElementById("portfolioModal");
         const modalBody = document.getElementById("modalBody");
+        const markdown = cardElement.querySelector('.project-markdown-content').innerHTML;
+
         modal.style.display = "block";
         document.body.style.overflow = "hidden";
-        modalBody.innerHTML = marked.parse(content.replace(/\\n/g, '\n'));
+
+        modalBody.innerHTML = marked.parse(markdown);
         Prism.highlightAll();
     }
 
