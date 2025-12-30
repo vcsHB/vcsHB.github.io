@@ -7,7 +7,11 @@
     }
 
     section {
-        padding-top: 20px !important;
+        width: 100% !important;
+        max-width: 850px !important;
+        margin: 0 auto !important;
+        padding: 40px 20px !important;
+        box-sizing: border-box !important;
     }
 
     .project-card {
@@ -133,7 +137,8 @@
 
     .tab-content {
         display: none;
-        animation: fadeIn 0.3s ease;
+        width: 100%;
+        min-height: 500px;
     }
 
     .tab-content.active {
@@ -246,7 +251,10 @@
     }
 
     @keyframes spin {
-    to { transform: rotate(360deg); }
-  }
-      @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        to { transform: rotate(360deg); }
+    }
+    
+    @keyframes fadeIn { 
+        from { opacity: 0; } to { opacity: 1; } 
+    }
 </style>
