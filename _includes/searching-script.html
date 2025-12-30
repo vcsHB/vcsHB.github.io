@@ -1,32 +1,31 @@
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-  const searchInput = document.getElementById('projectSearchInput');
-  const cards = document.querySelectorAll('.project-card');
-  const emptyMessage = document.getElementById('emptyResultMessage');
+    document.addEventListener("DOMContentLoaded", function () {
+        const searchInput = document.getElementById('projectSearchInput');
+        const cards = document.querySelectorAll('.project-card');
+        const emptyMessage = document.getElementById('emptyResultMessage');
 
-  if (searchInput) {
-    searchInput.addEventListener('input', function(e) {
-      const searchTerm = e.target.value.toLowerCase().replace(/\s+/g, '');
-      let visibleCount = 0;
+        if (searchInput) {
+            searchInput.addEventListener('input', function (e) {
+                const searchTerm = e.target.value.toLowerCase().replace(/\s+/g, '');
+                let visibleCount = 0;
 
-      cards.forEach(card => {
-        const title = card.getAttribute('data-search-title');
-        
-        if (title.includes(searchTerm)) {
-          card.style.display = 'flex';
-          visibleCount++;
-        } else {
-          card.style.display = 'none';
+                cards.forEach(card => {
+                    const title = card.getAttribute('data-search-title');
+
+                    if (title.includes(searchTerm)) {
+                        card.style.display = 'flex';
+                        visibleCount++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                if (visibleCount === 0 && searchTerm !== "") {
+                    emptyMessage.style.display = 'block';
+                } else {
+                    emptyMessage.style.display = 'none';
+                }
+            });
         }
-      });
-
-      if (visibleCount === 0 && searchTerm !== "") {
-        emptyMessage.style.display = 'block';
-      } else {
-        emptyMessage.style.display = 'none';
-      }
     });
-  }
-});
-
 </script>
