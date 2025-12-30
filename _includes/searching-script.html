@@ -1,37 +1,32 @@
 <script>
-    const GAS_URL = 'YOUR_GAS_URL';
-    const searchInput = document.getElementById('searchInput');
-    const projectCards = document.querySelectorAll('.project-card');
-    const noResult = document.getElementById('noResult');
+document.addEventListener("DOMContentLoaded", function() {
+  const searchInput = document.getElementById('projectSearchInput');
+  const cards = document.querySelectorAll('.project-card');
+  const emptyMessage = document.getElementById('emptyResultMessage');
 
-    if (searchInput) {
-        searchInput.addEventListener('input', (e) => {
-            const term = e.target.value.toLowerCase();
-            let hasVisible = false;
+  if (searchInput) {
+    searchInput.addEventListener('input', function(e) {
+      const searchTerm = e.target.value.toLowerCase().replace(/\s+/g, '');
+      let visibleCount = 0;
 
-            projectCards.forEach(card => {
-                const title = card.getAttribute('data-title');
-                if (title.includes(term)) {
-                    card.style.display = 'flex';
-                    hasVisible = true;
-                } else {
-                    card.style.display = 'none';
-                }
-            });
+      cards.forEach(card => {
+        const title = card.getAttribute('data-search-title');
+        
+        if (title.includes(searchTerm)) {
+          card.style.display = 'flex';
+          visibleCount++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
 
-            noResult.style.display = hasVisible ? 'none' : 'block';
-        });
-    }
-
-    document.querySelectorAll('.heart-count').forEach(span => {
-        const id = span.id.replace('count-', '');
-        fetch(`${GAS_URL}?action=get&id=${id}`)
-            .then(res => res.text())
-            .then(count => span.innerText = count);
+      if (visibleCount === 0 && searchTerm !== "") {
+        emptyMessage.style.display = 'block';
+      } else {
+        emptyMessage.style.display = 'none';
+      }
     });
+  }
+});
 
-    // 4. 하트 클릭 로직 (기존 코드)
-    function handleHeartClick(btn, id) {
-        // ... 기존 코드 내용 ...
-    }
 </script>
