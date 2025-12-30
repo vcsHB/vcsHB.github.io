@@ -170,38 +170,46 @@
         max-width: 600px;
         margin: 40px auto;
         position: relative;
-        border-left: 2px solid #eee;
-        padding-left: 30px;
+        border-left: 2px solid #e1e4e8;
+        padding-left: 35px;
     }
 
     .history-item {
         position: relative;
-        margin-bottom: 40px;
+        margin-bottom: 50px;
     }
 
     .history-item::before {
         content: "";
         position: absolute;
-        left: -37px;
-        top: 5px;
+        left: -42px;
+        top: 4px;
         width: 12px;
         height: 12px;
         border-radius: 50%;
         background: #0366d6;
-        border: 2px solid white;
+        border: 3px solid white;
+        box-shadow: 0 0 0 1px #e1e4e8;
     }
 
     .history-date {
         font-size: 13px;
-        color: #888;
+        color: #586069;
         display: block;
-        margin-bottom: 5px;
+        margin-bottom: 8px;
+        font-family: monospace;
     }
 
     .history-info strong {
-        font-size: 17px;
-        color: #333;
+        font-size: 18px;
+        color: #24292e;
         display: block;
+    }
+
+    .history-info p {
+        margin: 5px 0 0;
+        color: #6a737d;
+        font-size: 15px;
     }
 
     .modal {
@@ -236,8 +244,8 @@
         cursor: pointer;
         color: #aaa;
     }
-    
-@keyframes spin {
+
+    @keyframes spin {
     to { transform: rotate(360deg); }
   }
       @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }

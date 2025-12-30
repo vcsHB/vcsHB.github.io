@@ -16,23 +16,17 @@
         </div>
     </div>
 </div>
-
 <div id="History" class="tab-content">
     <div class="history-list">
+        {% for item in site.data.history %}
         <div class="history-item">
-            <span class="history-date">2024.03 - Present</span>
+            <span class="history-date">{{ item.date }}</span>
             <div class="history-info">
-                <strong>회사 또는 소속 명칭</strong>
-                <p>수행 업무 또는 직책 설명</p>
+                <strong>{{ item.title }}</strong>
+                <p>{{ item.description }}</p>
             </div>
         </div>
-        <div class="history-item">
-            <span class="history-date">2023.11</span>
-            <div class="history-info">
-                <strong>수상 내역 또는 프로젝트 완료</strong>
-                <p>상세 내용 설명</p>
-            </div>
-        </div>
+        {% endfor %}
     </div>
 </div>
 
