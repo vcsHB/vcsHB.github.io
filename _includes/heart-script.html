@@ -1,11 +1,14 @@
 <script>
     const GAS_URL =
         'https://script.google.com/macros/s/AKfycbzIex3Sdy37cyePa8FWlxWNQVVgC2dRvgD6up8qADnbh-VB5r4WK60xZWxTmuQCPZ0B/exec';
-
     window.handleHeartClick = function (btn, id) {
         const countSpan = btn.querySelector('.heart-count');
         if (!btn || btn.style.pointerEvents === 'none') return;
 
+        const currentCount = parseInt(countSpan.innerText) || 0;
+        countSpan.innerText = currentCount + 1;
+
+        btn.style.transform = "scale(1.3)";
         btn.style.pointerEvents = 'none';
 
         fetch(`${GAS_URL}?action=add&id=${id}`, {
@@ -14,36 +17,30 @@
             })
             .then(res => res.text())
             .then(newCount => {
-                if (countSpan && newCount) {
-                    countSpan.innerText = newCount;
-                }
-                btn.style.transform = "scale(1.3)";
+                if (newCount) countSpan.innerText = newCount;
+            })
+            .catch(err => {
+                countSpan.innerText = currentCount;
+            })
+            .finally(() => {
                 setTimeout(() => {
                     btn.style.transform = "scale(1)";
                     btn.style.pointerEvents = 'auto';
                 }, 200);
-            })
-            .catch(err => {
-                console.error("Heart Click Error:", err);
-                btn.style.pointerEvents = 'auto';
             });
     };
 
     document.addEventListener("DOMContentLoaded", function () {
         document.querySelectorAll('.heart-count').forEach(targetSpan => {
             const projectId = targetSpan.id.replace('count-', '');
-
             fetch(`${GAS_URL}?action=get&id=${projectId}`, {
                     method: 'GET',
                     redirect: 'follow'
                 })
                 .then(res => res.text())
                 .then(count => {
-                    if (count !== undefined && targetSpan) {
-                        targetSpan.innerText = count;
-                    }
-                })
-                .catch(err => console.error("Heart Load Error:", err));
+                    if (count !== undefined && targetSpan) targetSpan.innerText = count;
+                });
         });
 
         const searchInput = document.getElementById('projectSearchInput');
