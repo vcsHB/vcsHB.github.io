@@ -20,27 +20,32 @@
 
     function loadProfileReadme() {
         const container = document.querySelector('.github-profile-readme');
-        if (!container) return;
+        if (!container || container.innerHTML.trim() !== "") return;
 
-        fetch('{{ site.profile_readme_path | relative_url }}')
-            .then(response => response.text())
+        fetch('/_data/profile.md')
+            .then(response => {
+                if (!response.ok) throw new Error('404');
+                return response.text();
+            })
             .then(markdown => {
-                container.innerHTML = marked.parse(markdown);
-                if (window.Prism) Prism.highlightAll();
-                setTimeout(() => {
-                    container.classList.add('active');
-                }, 50);
+                if (window.marked) {
+                    container.innerHTML = marked.parse(markdown);
+                    if (window.Prism) Prism.highlightAll();
+                    setTimeout(() => container.classList.add('active'), 50);
+                }
             })
             .catch(() => {
-                container.innerHTML = '<p>README를 불러올 수 없습니다.</p>';
+                container.innerHTML = '<p>README를 불러올 수 없습니다. (_data/profile.md 파일을 확인하세요)</p>';
             });
     }
 
     document.addEventListener("DOMContentLoaded", function () {
         const activeTab = document.querySelector('.tab-link.active');
         if (activeTab) {
-            const tabName = activeTab.getAttribute('onclick').match(/'([^']+)'/)[1];
-            if (tabName === 'Profile') loadProfileReadme();
+            const onclickAttr = activeTab.getAttribute('onclick');
+            if (onclickAttr && onclickAttr.includes('Profile')) {
+                loadProfileReadme();
+            }
         }
     });
 </script>

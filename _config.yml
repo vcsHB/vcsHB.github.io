@@ -3,4 +3,3 @@ google_analytics:
 collections:
   projects:
     output: true 
-profile_readme_path: "_data/profile.md"
