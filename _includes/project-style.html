@@ -1,0 +1,55 @@
+<style>
+    .project-card {
+        display: flex;
+        align-items: center;
+        margin-bottom: 40px;
+        gap: 30px;
+        padding: 25px;
+        border-radius: 20px;
+        border: 1px solid #eee;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        position: relative;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .category-badge {
+        color: white;
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-size: 12px;
+        margin-right: 5px;
+        display: inline-block;
+    }
+
+    .project-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .project-card.row {
+        flex-direction: row;
+    }
+
+    .project-card.row-reverse {
+        flex-direction: row-reverse;
+    }
+
+    .thumbnail-container {
+        flex: 1;
+    }
+
+    .thumbnail-container img {
+        width: 100%;
+        border-radius: 15px;
+        display: block;
+    }
+
+    .content-container {
+        flex: 1;
+    }
+
+   .project-card {
+        flex-direction: column !important;
+    }
+    
+</style>

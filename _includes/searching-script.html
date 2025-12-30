@@ -1,0 +1,37 @@
+<script>
+    const GAS_URL = 'YOUR_GAS_URL';
+    const searchInput = document.getElementById('searchInput');
+    const projectCards = document.querySelectorAll('.project-card');
+    const noResult = document.getElementById('noResult');
+
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            let hasVisible = false;
+
+            projectCards.forEach(card => {
+                const title = card.getAttribute('data-title');
+                if (title.includes(term)) {
+                    card.style.display = 'flex';
+                    hasVisible = true;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            noResult.style.display = hasVisible ? 'none' : 'block';
+        });
+    }
+
+    document.querySelectorAll('.heart-count').forEach(span => {
+        const id = span.id.replace('count-', '');
+        fetch(`${GAS_URL}?action=get&id=${id}`)
+            .then(res => res.text())
+            .then(count => span.innerText = count);
+    });
+
+    // 4. 하트 클릭 로직 (기존 코드)
+    function handleHeartClick(btn, id) {
+        // ... 기존 코드 내용 ...
+    }
+</script>
