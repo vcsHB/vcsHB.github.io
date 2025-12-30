@@ -1,45 +1,49 @@
 <script>
     const GAS_URL =
         'https://script.google.com/macros/s/AKfycbzIex3Sdy37cyePa8FWlxWNQVVgC2dRvgD6up8qADnbh-VB5r4WK60xZWxTmuQCPZ0B/exec';
+    let pendingRequests = {};
+
     window.handleHeartClick = function (btn, id) {
         const countSpan = btn.querySelector('.heart-count');
-        if (!btn || btn.style.pointerEvents === 'none') return;
+        if (!countSpan) return;
 
-        const currentCount = parseInt(countSpan.innerText) || 0;
+        let currentCount = parseInt(countSpan.innerText) || 0;
         countSpan.innerText = currentCount + 1;
 
-        btn.style.transform = "scale(1.3)";
-        btn.style.pointerEvents = 'none';
+        btn.style.transform = "scale(1.5)";
+        setTimeout(() => {
+            btn.style.transform = "scale(1)";
+        }, 100);
 
-        fetch(`${GAS_URL}?action=add&id=${id}`, {
-                method: 'GET',
-                redirect: 'follow'
-            })
-            .then(res => res.text())
-            .then(newCount => {
-                if (newCount) countSpan.innerText = newCount;
-            })
-            .catch(err => {
-                countSpan.innerText = currentCount;
-            })
-            .finally(() => {
-                setTimeout(() => {
-                    btn.style.transform = "scale(1)";
-                    btn.style.pointerEvents = 'auto';
-                }, 200);
-            });
+        if (pendingRequests[id]) clearTimeout(pendingRequests[id]);
+
+        pendingRequests[id] = setTimeout(() => {
+            fetch(`${GAS_URL}?action=add&id=${id}`, {
+                    method: 'GET',
+                    redirect: 'follow'
+                })
+                .then(res => res.text())
+                .then(newCount => {
+                    if (newCount) countSpan.innerText = newCount;
+                });
+        }, 500);
     };
 
     document.addEventListener("DOMContentLoaded", function () {
         document.querySelectorAll('.heart-count').forEach(targetSpan => {
             const projectId = targetSpan.id.replace('count-', '');
+            targetSpan.innerHTML = '<span class="loading-spinner"></span>';
+
             fetch(`${GAS_URL}?action=get&id=${projectId}`, {
                     method: 'GET',
                     redirect: 'follow'
                 })
                 .then(res => res.text())
                 .then(count => {
-                    if (count !== undefined && targetSpan) targetSpan.innerText = count;
+                    targetSpan.innerText = count || 0;
+                })
+                .catch(() => {
+                    targetSpan.innerText = 0;
                 });
         });
 

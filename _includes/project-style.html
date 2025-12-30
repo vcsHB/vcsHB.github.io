@@ -22,11 +22,37 @@
     }
 
     .heart-container button {
-        transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        transition: transform 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        background: none;
+        border: none;
+        font-size: 22px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 5px 10px;
+        border-radius: 10px;
     }
 
     .heart-container button:active {
-        transform: scale(0.9) !important;
+        transform: scale(1.4) !important;
+    }
+
+    .loading-spinner {
+        display: inline-block;
+        width: 14px;
+        height: 14px;
+        border: 2px solid rgba(0, 0, 0, 0.1);
+        border-radius: 50%;
+        border-top-color: #ff4b2b;
+        animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+        to 
+        {
+            transform: rotate(360deg);
+        }
     }
 
     .project-card:hover {
