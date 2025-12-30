@@ -9,4 +9,6 @@ TEST
 
 {% include project-list.html %}
 
+{% include footer.html %}
+
 {% include heart-script.html %}
