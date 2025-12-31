@@ -1,18 +1,39 @@
 - date: "2023.03 - 2026.01"
   title: "경기게임마이스터고 재학"
   description: ""
+
+- date: "2024.06"
+  title: "2024 교내 개인프로젝트 1등"
+  description: "교내 수상 - AVOID\nAVOID : STOVE Indie Demo 출시"
+
+- date: "2024.09"
+  title: "2024 STA+C 가작상 수상"
+  description: "SmartTeenApp+Challenge - Code:Unknown"
+
+- date: "2024.11"
+  title: "2024 교내 엔진 팀 프로젝트 3등"
+  description: "교내 팀프로젝트 - OXIDATION"
+
+- date: "2024.12"
+  title: "2024 동계 게임잼 3등상 수상"
+  description: "교내 게임잼 - Edge"
+
 - date: "2025.05"
   title: "2025 PlayX4 전시"
   description: "PlayX4 in 일산 킨텍스 - NightCode"
+
 - date: "2025.08"
   title: "2025 BIC 전시"
   description: "Busan Indie Connect - NightCode"
+
 - date: "2025.10"
   title: "2025 GIGDC 금상 수상"
   description: "Global Indie Game Development Contest - NightCode"
+
 - date: "2025.10"
-  title: "(주)투핸즈 게임즈 현장실습"
-  description: "ChampionStrike 클라이언트 개빌"
+  title: "(주)투핸즈게임즈 현장실습"
+  description: "ChampionStrike 클라이언트 개발"
+
 - date: "2025.11"
   title: "2025 G-Star 전시"
   description: "G-star in 부산 벡스코 - NightCode"

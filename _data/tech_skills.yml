@@ -6,15 +6,15 @@
 - name: C#
   level: 85
   color: "#6423cc"
-  darkModeColor : "#FFFFFF"
+  darkModeColor : "#7e20e8"
   icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg"
 - name: C++
   level: 57
   color: "#478fed"
-  darkModeColor : "#FFFFFF"
+  darkModeColor : "#2b54d9"
   icon: "https://i.namu.wiki/i/Rv7cLGvX03Y-IX85VC6HXqtKuAhofMYJdodeW2v38Ghm6eCgDCqAhjXWcAWb0MB5UdvweeYI8QLNalwMevPplw.svg"
 - name: JavaScript
   level: 63
   color: "#b58d1f"
-  darkModeColor : "#FFFFFF"
+  darkModeColor : "#fcba03"
   icon: "https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png"
