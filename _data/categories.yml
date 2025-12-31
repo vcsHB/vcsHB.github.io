@@ -1,3 +1,10 @@
+- id: GameDev
+  name: "#Game_Dev"
+  color: "#3498db"
+- id: ClientDev
+  name: "#Client_Dev"
+  color: "#3498db"
+
 - id: Unity
   name: "Unity"
   color: "#3498db"

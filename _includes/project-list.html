@@ -11,13 +11,32 @@
             <img src="https://github.com/vcsHB.png" class="profile-avatar">
             <h2 style="margin: 0;">vcs</h2>
             <p style="color: #666; margin: 5px 0;">Developer</p>
+
+            <div class="category-badges"
+                style="margin-bottom: 15px; display: flex; flex-wrap: wrap; justify-content: center; gap: 5px;">
+                {% assign selected_ids = "GameDev,ClientDev,Unity" | split: "," %}
+                {% for cat in site.data.categories %}
+                {% if selected_ids contains cat.id %}
+                <span class="category-badge"
+                    style="background: {{ cat.color }}; font-size: 10px; padding: 3px 8px; border-radius: 12px; color: white;">
+                    {{ cat.name }}
+                </span>
+                {% endif %}
+                {% endfor %}
+            </div>
+
             <div class="profile-stats">
                 <p>📍 Seoul, Korea</p>
                 <p>📧 <a href="mailto:hoonbot06@gmail.com">hoonbot06@gmail.com</a></p>
                 <p>🔗 <a href="https://github.com/vcsHB" target="_blank">github.com/vcsHB</a></p>
             </div>
-        </div>
 
+            <div class="github-contributions" style="margin-top: 20px; text-align: left;">
+                <h3 style="font-size: 14px; margin-bottom: 8px; color: #333;">Contributions</h3>
+                <img src="https://ghchart.rshah.org/0366d6/vcsHB" alt="vcsHB's Github Chart"
+                    style="width: 100%; border-radius: 8px; border: 1px solid #eee; padding: 8px; background: white;" />
+            </div>
+        </div>
         <div class="github-profile-readme">
             <div id="profileReadmeContent"></div>
 
