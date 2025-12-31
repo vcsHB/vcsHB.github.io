@@ -1,10 +1,15 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"
+    integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg=="
+    crossorigin="anonymous">
+</script>
+
 <script>
     const SECRET_SALT = "vcs_portfolio_2025";
     const GAS_URL =
         'https://script.google.com/macros/s/AKfycbzIex3Sdy37cyePa8FWlxWNQVVgC2dRvgD6up8qADnbh-VB5r4WK60xZWxTmuQCPZ0B/exec';
 
     function generateHash(id) {
-        return btoa(id + "_" + SECRET_SALT);
+        return btoa(encodeURIComponent(id + "_" + SECRET_SALT));
     }
 
     window.handleHeartClick = function (btn, id) {
