@@ -1,0 +1,29 @@
+<script>
+    const SECRET_SALT = "vcs_portfolio_2025";
+
+    function generateHash(id) {
+        return btoa(id + "_" + SECRET_SALT);
+    }
+
+    function handleHeartClick(button, projectId) {
+        const storageKey = 'heart_' + projectId;
+        const currentHash = localStorage.getItem(storageKey);
+
+        if (currentHash === generateHash(projectId)) {
+            alert("이미 응원해주셨습니다!");
+            return;
+        }
+
+        const countElement = document.getElementById('count-' + projectId);
+
+        fetch(GAS_URL + "?id=" + projectId)
+            .then(res => res.json())
+            .then(data => {
+                countElement.innerText = data.count;
+                localStorage.setItem(storageKey, generateHash(projectId));
+                button.disabled = true;
+                button.style.opacity = "0.5";
+            })
+            .catch(err => console.error("Error:", err));
+    }
+</script>

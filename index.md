@@ -18,3 +18,5 @@ TEST
 {% include heart-script.html %}
 
 {% include modal-script.html %}
+
+{% include security-script.html %}
