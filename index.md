@@ -19,4 +19,3 @@ TEST
 
 {% include modal-script.html %}
 
-{% include security-script.html %}
