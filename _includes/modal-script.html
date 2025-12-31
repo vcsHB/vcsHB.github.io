@@ -4,18 +4,30 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js">
 </script>
+
 <script>
     function openModal(cardElement) {
         const modal = document.getElementById("portfolioModal");
         const modalBody = document.getElementById("modalBody");
+        const modalTitle = document.getElementById("modalTitle");
+        const modalThumbnail = document.getElementById("modalThumbnail");
+        const modalCategories = document.getElementById("modalCategories");
+
         if (!cardElement || !modal || !modalBody) return;
 
+        const title = cardElement.querySelector('h3').innerText;
+        const thumbnail = cardElement.querySelector('.thumbnail-container img').src;
+        const categories = cardElement.querySelector('.project-categories').innerHTML;
         const rawContent = cardElement.querySelector('.project-content-raw').innerHTML;
 
-        modal.style.display = "block";
-        document.body.style.overflow = "hidden";
-
+        modalTitle.innerText = title;
+        modalThumbnail.src = thumbnail;
+        modalCategories.innerHTML = categories;
         modalBody.innerHTML = marked.parse(rawContent);
+
+        modal.style.display = "block";
+        document.body.style.overflow = "hidden"; 
+
         Prism.highlightAll();
     }
 
