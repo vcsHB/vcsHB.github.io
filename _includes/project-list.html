@@ -64,7 +64,9 @@
                             <span>{{ skill.level }}</span>
                         </div>
                     </div>
-                    <div class="gauge-label">{{ skill.name }}</div>
+                    <div class="gauge-label"
+                        style="color: {{ skill.color | default: '#333' }};">{{ skill.name }}
+                    </div>
                 </div>
                 {% endfor %}
             </div>
