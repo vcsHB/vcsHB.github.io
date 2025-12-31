@@ -55,10 +55,10 @@
 
                 <div class="gauge-item">
                     <svg class="progress-ring" width="120" height="120">
-                        <circle stroke="#f0f0f0" stroke-width="8" fill="transparent" r="45" cx="60" cy="60" />
-                        <circle class="progress-ring-circle"
-                            stroke="{{ skill.color | default: '#0366d6' }}"
-                            stroke-width="8" fill="transparent" r="45" cx="60" cy="60"
+                        <circle stroke="var(--gauge-bg)" stroke-width="8" fill="transparent" r="45" cx="60" cy="60" />
+                        <circle class="progress-ring-circle skill-gauge-bar" data-light="{{ skill.color }}"
+                            data-dark="{{ skill.darkModeColor | default: skill.color }}"
+                            stroke="{{ skill.color }}" stroke-width="8" fill="transparent" r="45" cx="60" cy="60"
                             style="stroke-dasharray: {{ circumference }}; stroke-dashoffset: {{ final_offset }};" />
                     </svg>
 
@@ -70,8 +70,10 @@
                             <span>{{ skill.level }}</span>
                         </div>
                     </div>
-                    <div class="gauge-label"
-                        style="color: {{ skill.color | default: '#333' }};">{{ skill.name }}
+                    <div class="gauge-label skill-gauge-label" data-light="{{ skill.color }}"
+                        data-dark="{{ skill.darkModeColor | default: skill.color }}"
+                        style="color: {{ skill.color }};">
+                        {{ skill.name }}
                     </div>
                 </div>
                 {% endfor %}
@@ -163,15 +165,16 @@
 </div>
 
 <script>
-    window.onscroll = function () {
-        updateProgressBar()
-    };
-
-    function updateProgressBar() {
-        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        const scrolled = (winScroll / height) * 100;
-        document.getElementById("myBar").style.width = scrolled + "%";
+    function updateSkillColors(theme) {
+        const elements = document.querySelectorAll('.skill-gauge-bar, .skill-gauge-label');
+        elements.forEach(el => {
+            const color = theme === 'dark' ? el.getAttribute('data-dark') : el.getAttribute('data-light');
+            if (el.classList.contains('skill-gauge-bar')) {
+                el.setAttribute('stroke', color);
+            } else {
+                el.style.color = color;
+            }
+        });
     }
 
     function toggleTheme() {
@@ -180,8 +183,10 @@
 
         document.documentElement.setAttribute("data-theme", targetTheme);
         localStorage.setItem("theme", targetTheme);
+        updateSkillColors(targetTheme);
     }
 
     const savedTheme = localStorage.getItem("theme") || "light";
     document.documentElement.setAttribute("data-theme", savedTheme);
+    updateSkillColors(savedTheme);
 </script>
