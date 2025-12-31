@@ -14,7 +14,7 @@
 
             <div class="category-badges"
                 style="margin-bottom: 15px; display: flex; flex-wrap: wrap; justify-content: center; gap: 5px;">
-                {% assign selected_ids = "GameDev,ClientDev,Unity" | split: "," %}
+                {% assign selected_ids = "GameDev,ClientDev" | split: "," %}
                 {% for cat in site.data.categories %}
                 {% if selected_ids contains cat.id %}
                 <span class="category-badge"
