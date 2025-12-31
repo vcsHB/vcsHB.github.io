@@ -46,6 +46,23 @@
         box-sizing: border-box !important;
     }
 
+    .progress-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        z-index: 30000;
+        background: transparent;
+    }
+
+    .progress-bar {
+        height: 100%;
+        background: var(--accent-color);
+        width: 0%;
+        transition: width 0.1s;
+    }
+
     .theme-switch {
         position: fixed;
         top: 25px;
@@ -317,21 +334,21 @@
         display: block;
         font-size: 10px;
         text-transform: uppercase;
-        color: var(--sub-text);
+        color: var(--sub-text) !important;
         letter-spacing: 1px;
     }
 
     .gauge-text-box span {
         font-size: 20px;
         font-weight: 800;
-        color: var(--text-color);
+        color: var(--text-color) !important;
     }
 
     .gauge-label {
         margin-top: -10px;
         font-weight: 700;
         font-size: 20px;
-        color: var(--text-color);
+        color: var(--text-color) !important;
         text-align: center;
     }
 
