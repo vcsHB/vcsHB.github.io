@@ -105,19 +105,21 @@
     </div>
     <div id="projectList">
         {% for item in site.projects %}
-
-        <div class="project-card row"
+        <div class="project-card"
             data-title="{{ item.title | downcase | replace: ' ', '' }}"
             onclick="openModal(this)">
+
             <script class="project-content-raw" type="text/template">{{ item.content }}</script>
 
             <div class="thumbnail-container">
                 <img src="{{ item.thumbnail }}">
             </div>
+
             <div class="content-container">
-                <h3 style="margin: 10px 0;">{{ item.title }}</h3>
-                <p style="color: #666;">{{ item.description }}</p>
-                <div class="heart-container" style="position: absolute; bottom: 20px; right: 25px;">
+                <h3 style="margin: 0 0 10px 0;">{{ item.title }}</h3>
+                <p style="color: #666; line-height: 1.6; margin-bottom: 40px;">{{ item.description }}</p>
+
+                <div class="heart-container" style="position: absolute; bottom: 0px; right: 0px;">
                     <button onclick="event.stopPropagation(); handleHeartClick(this, '{{ item.title | slugify }}')">
                         ❤️ <span class="heart-count" id="count-{{ item.title | slugify }}">0</span>
                     </button>
