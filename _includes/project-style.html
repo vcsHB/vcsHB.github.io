@@ -46,6 +46,34 @@
         box-sizing: border-box !important;
     }
 
+
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1rem 0;
+        background-color: var(--card-bg);
+        color: var(--text-color);
+    }
+
+    th,
+    td {
+        padding: 12px;
+        border: 1px solid var(--card-border);
+        text-align: left;
+    }
+
+    th {
+        background-color: var(--gauge-bg);
+        font-weight: bold;
+    }
+
+    tr:nth-child(even) {
+        background-color: var(--bg-color);
+
+    }
+
+
     .theme-switch {
         position: fixed;
         top: 25px;
