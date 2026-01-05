@@ -8,27 +8,27 @@ categories: ["Unity"]  # Category Id
 ### 프로젝트 개요
 
 ## 개요
-<table style="margin-left: auto; margin-right: auto; border: none;">
-  <tr style="border: 0 !important;">
-    <td style="border: none; vertical-align: top;">
-
+<div style="display: flex; justify-content: center; align-items: stretch; gap: 20px;">
+  <div style="flex: 1; min-width: 0;">
+  
 | 제목 | AVOID |
 | --- | --- |
 | 장르 | 3D / 실시간 / 턴제  / 퍼즐 |
 | 플랫폼 | Windows |
 | 다운로드 | 🔗[스토브 인디](https://store.onstove.com/en/games/4039) |
-</td>
-<td style="border: none; width: 10px;"></td> <td style="border: none; vertical-align: top;">
+
+</div>
+
+  <div style="flex: 1; min-width: 0;">
 
 | 깃허브 | 🔗[AVOID Git](https://github.com/vcsHB/AVOID) |
 | --- | --- |
 | 개발 환경 | Unity / C# |
 | 개발 인원 | 1인 팀 |
 | 역할 | 기획 / 개발 / 아트 |
-</td>
-</tr>
-</table>
-<br>
+
+</div>
+</div>
 
 ## 💻 주요 기능 개발 리스트
 
