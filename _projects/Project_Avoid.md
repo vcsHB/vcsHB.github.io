@@ -9,8 +9,8 @@ categories: ["Unity"]  # Category Id
 
 ## 개요
 <div style="display: flex; justify-content: center; align-items: stretch; gap: 20px;">
-  <div style="flex: 1; min-width: 0;">
-  
+  <div style="flex: 1; width: 50%; min-width: 0;">
+
 | 제목 | AVOID |
 | --- | --- |
 | 장르 | 3D / 실시간 / 턴제  / 퍼즐 |
@@ -19,7 +19,7 @@ categories: ["Unity"]  # Category Id
 
 </div>
 
-  <div style="flex: 1; min-width: 0;">
+  <div style="flex: 1; width: 50%; min-width: 0;">
 
 | 깃허브 | 🔗[AVOID Git](https://github.com/vcsHB/AVOID) |
 | --- | --- |
