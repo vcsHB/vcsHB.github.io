@@ -71,17 +71,20 @@
     [data-theme='dark'] table {
         background-color: var(--card-bg) !important;
         color: var(--text-color) !important;
-        border-color: var(--card-border) !important;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    [data-theme='dark'] th,
+    [data-theme='dark'] td,
+    [data-theme='dark'] tr {
+        background-color: var(--card-bg) !important;
+        color: var(--text-color) !important;
+        border: 1px solid var(--card-border) !important;
     }
 
     [data-theme='dark'] th {
         background-color: var(--gauge-bg) !important;
-        color: var(--text-color) !important;
-    }
-
-    [data-theme='dark'] td {
-        color: var(--text-color) !important;
-        border: 1px solid var(--card-border) !important;
     }
 
     .theme-switch {
