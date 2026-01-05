@@ -9,7 +9,7 @@ categories: ["Unity"]  # Category Id
 
 ## 개요
 <table style="margin-left: auto; margin-right: auto; border: none;">
-  <tr style="border: none;">
+  <tr style="border: 0 !important;">
     <td style="border: none; vertical-align: top;">
 
 | 제목 | AVOID |
