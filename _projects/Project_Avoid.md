@@ -5,6 +5,7 @@ description: "이 프로젝트는 이런 기술을 써서 만들었습니다."
 thumbnail: "/assets/Thumbnails/Default_Thumbnail.png"
 categories: ["Unity"]  # Category Id
 order: 4
+color : "#5c5c5c"
 ---
 
 ## 📕 개요

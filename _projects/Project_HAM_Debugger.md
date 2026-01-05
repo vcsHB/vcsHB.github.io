@@ -5,6 +5,7 @@ description: "Log 및 CMD창을 이용한 Unity 전용 디버깅이 가능합니
 thumbnail: "/assets/Thumbnails/Logo_HAM_Debugger.png"
 categories: ["Unity", "Asset"]  # Category Id
 order: 10
+color : "#ff7300"
 ---
 ## 📕 개요
 

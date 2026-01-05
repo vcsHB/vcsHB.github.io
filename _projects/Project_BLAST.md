@@ -5,6 +5,7 @@ description: ""
 thumbnail: "/assets/Thumbnails/Title_BLAST.png"
 categories: ["Unity"]  # Category Id
 order: 1
+color : "#4287f5"
 ---
 
 ## 📕 개요
