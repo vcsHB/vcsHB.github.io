@@ -1,11 +1,12 @@
 ---
 layout: default
 title: "HAM_Debugger"
-description: "Log 및 CMD창을 이용한 Unity전용 디버깅이 가능합니다. 커스터마이징 및 확장이 가능합니다."
+description: "Log 및 CMD창을 이용한 Unity 전용 디버깅이 가능합니다. 커스터마이징 및 확장이 가능합니다."
 thumbnail: "/assets/Thumbnails/Logo_HAM_Debugger.png"
 categories: ["Unity", "Asset"]  # Category Id
+order: 10
 ---
-> ## 📕 개요
+## 📕 개요
 
 <div style="display: flex; width: 100%; gap: 10px; justify-content: space-between;">
 <div style="flex: 1; width: 50%;">
@@ -32,22 +33,21 @@ categories: ["Unity", "Asset"]  # Category Id
 </div>
 
 
-> ## 💻 주요 기능
+## 💻 주요 기능
 - **CMD Console Window** 기반 에디터
 - **Object Clipboard** 
 
 
-> ## 🪟 CMD Console Window 기반 에디터
-    CMD 창을 Unity에 적용시켜 지정된 명령어를 입력하면
-    특정 작업을 수행하도록 확장 가능한 디버깅 툴입니다.
+## 🪟 CMD Console Window 기반 에디터
+CMD 창을 Unity에 적용시켜 지정된 명령어를 입력하면 특정 작업을 수행하도록 확장 가능한 디버깅 툴입니다.
+
+<br>
+<hr>
+<br>
 
 
-
-
-
-
-> ## 📋 Object Clipboard
-    오브젝트 및 각종 파일들을 Reference로 담아둘 수 있는 '클립보드' 입니다.
+## 📋 Object Clipboard
+오브젝트 및 각종 파일들을 Reference로 담아둘 수 있는 '클립보드' 입니다.
 
 
     

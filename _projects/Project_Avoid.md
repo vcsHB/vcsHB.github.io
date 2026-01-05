@@ -4,9 +4,10 @@ title: "AVOID"
 description: "이 프로젝트는 이런 기술을 써서 만들었습니다."
 thumbnail: "/assets/Thumbnails/Default_Thumbnail.png"
 categories: ["Unity"]  # Category Id
+order: 4
 ---
 
-> ## 📕 개요
+## 📕 개요
 <div style="display: flex; width: 100%; gap: 10px; justify-content: space-between;">
 <div style="flex: 1; width: 50%;">
 <style>
@@ -35,15 +36,17 @@ categories: ["Unity"]  # Category Id
 </div>
 </div>
 
-> ## 💻 주요 기능 개발 리스트
+## 💻 주요 기능 개발 리스트
 
 - **MOVE to INTERACT System** - 움직임을 통한 상호작용<br>
 
 - **Stage Manage System** - 스테이지 동적 생성 및 관리
 
 <br>
+<hr>
+<br>
 
-> ## ➡️ MOVE to INTERACT System - 움직임을 통한 상호작용
+## ➡️ MOVE to INTERACT System - 움직임을 통한 상호작용
 
 AVOID는 움직임을 통한 상호작용 시스템을 가지고 있습니다. 
 
