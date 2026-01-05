@@ -8,8 +8,13 @@ categories: ["Unity"]  # Category Id
 ### 프로젝트 개요
 
 ## 개요
-<div style="display: flex; justify-content: center; align-items: stretch; gap: 20px;">
-  <div style="flex: 1; width: 50%; min-width: 0;">
+<div style="display: flex; width: 100%; gap: 10px; justify-content: space-between;">
+
+  <div style="flex: 1; width: 50%;">
+    <style>
+      .equal-table table { width: 100% !important; table-layout: fixed !important; }
+    </style>
+    <div class="equal-table">
 
 | 제목 | AVOID |
 | --- | --- |
@@ -18,8 +23,10 @@ categories: ["Unity"]  # Category Id
 | 다운로드 | 🔗[스토브 인디](https://store.onstove.com/en/games/4039) |
 
 </div>
+  </div>
 
-  <div style="flex: 1; width: 50%; min-width: 0;">
+  <div style="flex: 1; width: 50%;">
+    <div class="equal-table">
 
 | 깃허브 | 🔗[AVOID Git](https://github.com/vcsHB/AVOID) |
 | --- | --- |
@@ -28,8 +35,9 @@ categories: ["Unity"]  # Category Id
 | 역할 | 기획 / 개발 / 아트 |
 
 </div>
-</div>
+  </div>
 
+</div>
 ## 💻 주요 기능 개발 리스트
 
 - **MOVE to INTERACT System** - 움직임을 통한 상호작용<br>
