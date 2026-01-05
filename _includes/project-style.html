@@ -73,6 +73,26 @@
 
     }
 
+    [data-theme='dark'] table {
+        background-color: var(--card-bg) !important;
+        color: var(--text-color) !important;
+        border-color: var(--card-border) !important;
+    }
+
+    [data-theme='dark'] th {
+        background-color: var(--gauge-bg) !important;
+        color: var(--text-color) !important;
+    }
+
+    [data-theme='dark'] td {
+        color: var(--text-color) !important;
+        border: 1px solid var(--card-border) !important;
+    }
+
+    [data-theme='dark'] tr:nth-child(even) {
+        background-color: var(--bg-color) !important;
+    }
+
 
     .theme-switch {
         position: fixed;
