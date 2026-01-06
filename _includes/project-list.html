@@ -118,8 +118,9 @@
 
         {% for item in sorted_projects %}
         <div class="project-card" onclick="openModal(this)"
+            data-title="{{ item.title | downcase | replace: ' ', '' }}"
+            data-category="{% for cat_id in item.categories %}{% assign cat_data = site.data.categories | where: 'id', cat_id | first %}{{ cat_data.name | downcase | replace: ' ', '' }},{% endfor %}"
             style="--hover-color: {{ item.color | default: 'var(--accent-color)' }};">
-
             <script class="project-content-raw" type="text/template">{{ item.content }}</script>
 
             <div class="thumbnail-container">
