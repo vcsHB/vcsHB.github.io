@@ -170,19 +170,36 @@
 </div>
 
 <script>
-    window.addEventListener('DOMContentLoaded', (event) => {
+    window.addEventListener('DOMContentLoaded', () => {
         const urlParams = new URLSearchParams(window.location.search);
-        const targetTab = urlParams.get('tab'); 
+        const targetTab = urlParams.get('tab');
+        const targetProject = urlParams.get('project');
 
         if (targetTab && document.getElementById(targetTab)) {
-            const fakeEvent = {
-                currentTarget: document.querySelector(`button[onclick*="${targetTab}"]`)
-            };
-            if (fakeEvent.currentTarget) {
-                openTab(fakeEvent, targetTab);
-            }
+            const tabButton = document.querySelector(`button[onclick*="'${targetTab}'"]`);
+            if (tabButton) tabButton.click();
+        } else if (targetProject) {
+            const portfolioTabBtn = document.querySelector(`button[onclick*="'Portfolio'"]`);
+            if (portfolioTabBtn) portfolioTabBtn.click();
+        }
+
+        if (targetProject) {
+            const projectCards = document.querySelectorAll('.project-card');
+            projectCards.forEach(card => {
+                const cardTitle = card.querySelector('h3').innerText.trim();
+                if (cardTitle.toLowerCase() === targetProject.toLowerCase()) {
+                    setTimeout(() => {
+                        openModal(card);
+                    }, 100);
+                }
+            });
         }
     });
+
+    function openModalWithUrl(cardElement) {
+        openModal(cardElement); // For Modal.....
+        const title = cardElement.querySelector('h3').innerText;
+    }
 
     function updateSkillColors(theme) {
         const elements = document.querySelectorAll('.skill-gauge-bar, .skill-gauge-label');
