@@ -21,7 +21,7 @@
                     const isMatch =
                         title.includes(searchTerm) ||
                         category.includes(searchTerm);
-                    console.log(card.dataset.category);
+                    console.log(isMatch, title, category);
                     card.style.display = isMatch ? 'flex' : 'none';
                 });
 
