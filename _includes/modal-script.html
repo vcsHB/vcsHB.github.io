@@ -6,7 +6,7 @@
 </script>
 
 <script>
-    function openModal(cardElement) {
+    function openModal(cardElement, isInitialLoad = false) {
         const modal = document.getElementById("portfolioModal");
         const modalBody = document.getElementById("modalBody");
         const modalTitle = document.getElementById("modalTitle");
@@ -15,14 +15,12 @@
 
         if (!cardElement || !modal || !modalBody) return;
 
-        const title = cardElement.querySelector('h3').innerText;
+        const title = cardElement.querySelector('h3').innerText.trim();
 
-        document.getElementById("modalTitle").innerText = title;
-        document.getElementById("modalThumbnail").src = cardElement.querySelector('.thumbnail-container img').src;
-        document.getElementById("modalCategories").innerHTML = cardElement.querySelector('.project-categories')
-            .innerHTML;
-        document.getElementById("modalBody").innerHTML = marked.parse(cardElement.querySelector('.project-content-raw')
-            .innerHTML);
+        modalTitle.innerText = title;
+        modalThumbnail.src = cardElement.querySelector('.thumbnail-container img').src;
+        modalCategories.innerHTML = cardElement.querySelector('.project-categories').innerHTML;
+        modalBody.innerHTML = marked.parse(cardElement.querySelector('.project-content-raw').innerHTML);
 
         modal.style.display = "block";
         document.body.style.overflow = "hidden";
@@ -30,15 +28,29 @@
 
         const newUrl = new URL(window.location);
         newUrl.searchParams.set('project', title);
-        window.history.pushState({}, '', newUrl);
+
+        if (isInitialLoad) {
+            window.history.replaceState({
+                isModal: true
+            }, '', newUrl);
+        } else {
+            window.history.pushState({
+                isModal: true
+            }, '', newUrl);
+        }
     }
 
-    function closeModal() {
-        document.getElementById("portfolioModal").style.display = "none";
+    function closeModal(isPopState = false) {
+        const modal = document.getElementById("portfolioModal");
+        if (!modal || modal.style.display === "none") return;
+
+        modal.style.display = "none";
         document.body.style.overflow = "auto";
 
-        const newUrl = new URL(window.location);
-        newUrl.searchParams.delete('project');
-        window.history.pushState({}, '', newUrl);
+        if (isPopState !== true) {
+            const newUrl = new URL(window.location);
+            newUrl.searchParams.delete('project');
+            window.history.pushState({}, '', newUrl);
+        }
     }
 </script>
