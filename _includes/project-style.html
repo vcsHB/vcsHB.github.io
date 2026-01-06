@@ -87,6 +87,22 @@
         background-color: var(--gauge-bg) !important;
     }
 
+    a {
+        color: var(--accent-color);
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+        filter: brightness(1.2);
+    }
+
+    [data-theme='dark'] a {
+        color: #80dfff !important;
+    }
+
+
+
     .theme-switch {
         position: fixed;
         top: 25px;
@@ -473,6 +489,8 @@
     #modalBody {
         padding: 0 50px 60px 50px;
         line-height: 1.8;
+        
+        
         font-size: 1.05rem;
     }
 
