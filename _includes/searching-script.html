@@ -8,10 +8,13 @@
                 const searchTerm = e.target.value.toLowerCase().replace(/\s+/g, '');
 
                 cards.forEach(card => {
-                    const title = (card.getAttribute('data-title') || '')
-                        .toLowerCase().replace(/\s+/g, '');
-                    const category = (card.getAttribute('data-category') || '')
-                        .toLowerCase().replace(/\s+/g, '');
+                    const title = (card.dataset.title || '')
+                        .toLowerCase()
+                        .replace(/\s+/g, '');
+
+                    const category = (card.dataset.category || '')
+                        .toLowerCase()
+                        .replace(/\s+/g, '');
 
                     const isMatch = title.includes(searchTerm) || category.includes(searchTerm);
 
