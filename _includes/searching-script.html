@@ -10,13 +10,13 @@
                 cards.forEach(card => {
                     const title = (card.getAttribute('data-title') || "");
                     const category = (card.getAttribute('data-category') || "");
-                    
+
                     console.log(`Search: ${searchTerm}, Category: ${category}`);
-                    
+
                     if (title.includes(searchTerm) || category.includes(searchTerm)) {
-                        card.style.display = 'flex';
+                        card.classList.remove('is-hidden')
                     } else {
-                        card.style.display = 'none';
+                        card.classList.add('is-hidden')
                     }
                 });
             });
