@@ -118,6 +118,7 @@
 
         {% for item in sorted_projects %}
         <div class="project-card" onclick="openModal(this)"
+            data-category="{{ item.categories | join: ',' }}"
             style="--hover-color: {{ item.color | default: 'var(--accent-color)' }};">
 
             <script class="project-content-raw" type="text/template">{{ item.content }}</script>
