@@ -111,14 +111,13 @@
 <div id="Portfolio" class="tab-content">
     <div style="margin-bottom: 30px;">
         <input type="text" id="searchInput" placeholder="Search projects..."
-            style="width: 100%; padding: 12px; border-radius: 12px; border: 1px solid var(--card-border); background-color: var(--card-bg); color: var(--text-color);">
+            style="width: 100%; padding: 12px; border-radius: 12px; border: 1px solid #eee;">
     </div>
     <div id="projectList">
         {% assign sorted_projects = site.projects | sort: "order" %}
 
         {% for item in sorted_projects %}
-        <div class="project-card" onclick="openModal(this)" data-title="{{ item.title }}"
-            data-category="{% for cat_id in item.categories %}{% assign cat_data = site.data.categories | where: 'id', cat_id | first %}{{ cat_data.name }}{% unless forloop.last %},{% endunless %}{% endfor %}"
+        <div class="project-card" onclick="openModal(this)"
             style="--hover-color: {{ item.color | default: 'var(--accent-color)' }};">
 
             <script class="project-content-raw" type="text/template">{{ item.content }}</script>
