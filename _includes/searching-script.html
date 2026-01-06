@@ -5,17 +5,11 @@
 
         if (searchInput) {
             searchInput.addEventListener('input', function (e) {
-                const searchTerm = e.target.value.toLowerCase().replace(/\s+/g, '').trim();
-
+                const searchTerm = e.target.value.toLowerCase().replace(/\s+/g, '');
                 cards.forEach(card => {
-                    const title = (card.getAttribute('data-title') || "").toLowerCase();
-                    const category = (card.getAttribute('data-category') || "").toLowerCase();
-
-                    if (title.includes(searchTerm) || category.includes(searchTerm)) {
-                        card.style.display = 'flex';
-                    } else {
-                        card.style.display = 'none';
-                    }
+                    const title = card.getAttribute('data-title').toLowerCase().replace(/\s+/g,
+                        '') || "";
+                    card.style.display = title.includes(searchTerm) ? 'flex' : 'none';
                 });
             });
         }
