@@ -16,23 +16,29 @@
         if (!cardElement || !modal || !modalBody) return;
 
         const title = cardElement.querySelector('h3').innerText;
-        const thumbnail = cardElement.querySelector('.thumbnail-container img').src;
-        const categories = cardElement.querySelector('.project-categories').innerHTML;
-        const rawContent = cardElement.querySelector('.project-content-raw').innerHTML;
 
-        modalTitle.innerText = title;
-        modalThumbnail.src = thumbnail;
-        modalCategories.innerHTML = categories;
-        modalBody.innerHTML = marked.parse(rawContent);
+        document.getElementById("modalTitle").innerText = title;
+        document.getElementById("modalThumbnail").src = cardElement.querySelector('.thumbnail-container img').src;
+        document.getElementById("modalCategories").innerHTML = cardElement.querySelector('.project-categories')
+            .innerHTML;
+        document.getElementById("modalBody").innerHTML = marked.parse(cardElement.querySelector('.project-content-raw')
+            .innerHTML);
 
         modal.style.display = "block";
         document.body.style.overflow = "hidden";
-
         Prism.highlightAll();
+
+        const newUrl = new URL(window.location);
+        newUrl.searchParams.set('project', title);
+        window.history.pushState({}, '', newUrl);
     }
 
     function closeModal() {
         document.getElementById("portfolioModal").style.display = "none";
         document.body.style.overflow = "auto";
+
+        const newUrl = new URL(window.location);
+        newUrl.searchParams.delete('project');
+        window.history.pushState({}, '', newUrl);
     }
 </script>

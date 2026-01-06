@@ -179,18 +179,18 @@
             const tabButton = document.querySelector(`button[onclick*="'${targetTab}'"]`);
             if (tabButton) tabButton.click();
         } else if (targetProject) {
-            const portfolioTabBtn = document.querySelector(`button[onclick*="'Portfolio'"]`);
-            if (portfolioTabBtn) portfolioTabBtn.click();
+            const portfolioBtn = document.querySelector(`button[onclick*="'Portfolio'"]`);
+            if (portfolioBtn) portfolioBtn.click();
         }
-
+        // Open Modal If Project param exists
         if (targetProject) {
             const projectCards = document.querySelectorAll('.project-card');
             projectCards.forEach(card => {
-                const cardTitle = card.querySelector('h3').innerText.trim();
-                if (cardTitle.toLowerCase() === targetProject.toLowerCase()) {
-                    setTimeout(() => {
-                        openModal(card);
-                    }, 100);
+                const cardTitle = card.querySelector('h3').innerText.trim().toLowerCase();
+                const searchTitle = targetProject.toLowerCase().replace(/ /g, '');
+
+                if (cardTitle.replace(/ /g, '') === searchTitle) {
+                    setTimeout(() => openModal(card), 200);
                 }
             });
         }
