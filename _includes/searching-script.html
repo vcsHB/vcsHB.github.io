@@ -11,15 +11,14 @@
                     const title = (card.getAttribute('data-title') || "");
                     const category = (card.getAttribute('data-category') || "");
 
-                    if (searchTerm.length > 0) {
-                        console.log(
-                            `입력: ${searchTerm} | 타이틀일치: ${title.includes(searchTerm)} | 카테고리일치: ${category.includes(searchTerm)}`
-                        );
-                    }
-                    if (title.includes(searchTerm) || category.includes(searchTerm)) {
-                        card.classList.remove('is-hidden')
+                    const isMatch = title.includes(searchTerm) || category.includes(searchTerm);
+
+                    if (isMatch) {
+                        card.style.display = '';
+                        card.classList.remove('is-hidden');
                     } else {
-                        card.classList.add('is-hidden')
+                        card.style.display = 'none';
+                        card.classList.add('is-hidden');
                     }
                 });
             });
