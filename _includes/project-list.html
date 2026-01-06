@@ -170,6 +170,20 @@
 </div>
 
 <script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const targetTab = urlParams.get('tab'); 
+
+        if (targetTab && document.getElementById(targetTab)) {
+            const fakeEvent = {
+                currentTarget: document.querySelector(`button[onclick*="${targetTab}"]`)
+            };
+            if (fakeEvent.currentTarget) {
+                openTab(fakeEvent, targetTab);
+            }
+        }
+    });
+
     function updateSkillColors(theme) {
         const elements = document.querySelectorAll('.skill-gauge-bar, .skill-gauge-label');
         elements.forEach(el => {

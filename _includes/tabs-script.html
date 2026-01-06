@@ -19,6 +19,12 @@
         if (tabName === 'Profile') {
             loadProfileReadme();
         }
+
+        const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?tab=' +
+            tabName;
+        window.history.pushState({
+            path: newUrl
+        }, '', newUrl);
     }
 
     function loadProfileReadme() {
