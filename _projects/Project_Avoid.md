@@ -57,13 +57,14 @@ AVOID는 움직임을 통한 상호작용 시스템을 가지고 있습니다.
 
 🔗[깃허브 PushObject.cs](https://github.com/vcsHB/AVOID/blob/main/Assets/01.Scripts/InGame/Object/InteractionObject/PushObject.cs)
 
-<img src="..\assets\ReferenceData\ProjectAvoid\Image_Avoid_1.png" height="300px"/>
+<img src="..\assets\ReferenceData\ProjectAvoid\Image_Avoid_1.png" height="300px" style ="border-radius: 8px;"/>
 
 예를 들어 일렬로 나란히 놓은 PushObject를 상호작용 한다면. 상호작용 방향에 놓인 PushObject들은 연쇄적으로 밀려나야합니다.  따라서 IInteractable 인터페이스는 MoveDirection 프로퍼티를 통해 이동방향을 나타냅니다. 그리고 다음 오브젝트에게 자신 객체를 통째로 넘기는 것이 아닌. IInteractable 객체만을 넘겨 이동방향을 전달합니다.
-<img src="..\assets\ReferenceData\ProjectAvoid\Image_Avoid_2.png" height="300px"/>
+
+<img src="..\assets\ReferenceData\ProjectAvoid\Image_Avoid_2.png" height="300px" style ="border-radius: 8px;"/>
 
 또한 최종적으로 마지막으로 밀려날 오브젝트의 이동방향에 장애물이 존재한다면. 첫번째 밀려난 오브젝트는 물론 플레이어의 상호작용 행위 그 자체가 취소되어야합니다. 
 
-<img src="..\assets\ReferenceData\ProjectAvoid\Image_Avoid_3.png"/>
+<img src="..\assets\ReferenceData\ProjectAvoid\Image_Avoid_3.png" style ="border-radius: 8px;"/>
 
 이를 위해 IInteractable 인터페이스의 DetectInteraction()은 bool값을 반환하여. 연쇄적인 상호작용을 타고 전방에 장애물이 있는지를 검사하고 그 결과를 반환하여 움직임의 여부를 최종 결정합니다.
