@@ -4,14 +4,29 @@
         const cards = document.querySelectorAll('.project-card');
 
         if (searchInput) {
-            searchInput.addEventListener('input', function (e) {
-                const searchTerm = e.target.value.toLowerCase().replace(/\s+/g, '');
+            cards.forEach(card => {
+                if (!card.dataset.display) {
+                    card.dataset.display = getComputedStyle(card).display;
+                }
+            });
+
+            searchInput.addEventListener('input', e => {
+                const term = e.target.value.toLowerCase().trim();
+
                 cards.forEach(card => {
-                    const title = card.getAttribute('data-title').toLowerCase().replace(/\s+/g,
-                        '') || "";
-                    card.style.display = title.includes(searchTerm) ? 'flex' : 'none';
+                    const title = (card.dataset.title || '').toLowerCase();
+                    const category = (card.dataset.category || '').toLowerCase();
+
+                    const isMatch =
+                        title.includes(term) ||
+                        category.includes(term);
+
+                    card.style.display = isMatch ?
+                        card.dataset.display :
+                        'none';
                 });
             });
+
         }
     });
 </script>

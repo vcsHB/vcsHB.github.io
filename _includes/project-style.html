@@ -46,7 +46,32 @@
         box-sizing: border-box !important;
     }
 
+    .site-footer {
+        padding: 50px 0;
+        text-align: center;
+        color: var(--sub-text);
+    }
 
+    .site-footer h3 {
+        color: var(--text-color);
+    }
+
+    .site-footer a {
+        color: var(--accent-color);
+        text-decoration: none;
+    }
+
+    .equal-table table {
+        width: 100% !important;
+        display: table !important;
+        table-layout: fixed !important;
+        margin: 0 !important;
+    }
+
+    .equal-table td:first-child,
+    .equal-table th:first-child {
+        width: 35% !important;
+    }
 
     table {
         width: 100%;
@@ -87,6 +112,22 @@
         background-color: var(--gauge-bg) !important;
     }
 
+    a {
+        color: var(--accent-color);
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+        filter: brightness(1.2);
+    }
+
+    [data-theme='dark'] a {
+        color: #80dfff !important;
+    }
+
+
+
     .theme-switch {
         position: fixed;
         top: 25px;
@@ -123,6 +164,10 @@
         overflow: hidden;
         min-height: 260px;
         color: var(--text-color);
+    }
+
+    .project-card.is-hidden {
+        display: none !important;
     }
 
     .project-card:nth-child(even) {
@@ -473,6 +518,8 @@
     #modalBody {
         padding: 0 50px 60px 50px;
         line-height: 1.8;
+
+
         font-size: 1.05rem;
     }
 
