@@ -1,9 +1,9 @@
 ---
 layout: default
 title: "AVOID"
-description: "이 프로젝트는 이런 기술을 써서 만들었습니다."
+description: "3D 실시간 턴제 퍼즐 게임입니다."
 thumbnail: "/assets/Thumbnails/Default_Thumbnail.png"
-categories: ["Unity"]  # Category Id
+categories: ["SingleProject", "Unity", "Award"]  # Category Id
 order: 4
 color : "#5c5c5c"
 ---

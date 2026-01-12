@@ -5,9 +5,21 @@
   name: "#Client_Dev"
   color: "#3498db"
 
+
+- id: SingleProject
+  name: "개인 프로젝트"
+  color: "#5d9642"
+- id: TeamProject
+  name: "팀 프로젝트"
+  color: "#458071"
+
+
 - id: Unity
   name: "Unity"
-  color: "#3498db"
+  color: "#828282"
+- id: Cpp
+  name: "C++"
+  color: "#386de0"
 - id: Asset
   name: "Assets"
   color: "#e74c3c"
@@ -19,8 +31,9 @@
   color: "#9b59b6"
 - id: PlayX4
   name: "PlayX4"
-  color: "#9b59b6"
+  color: "#b770db"
 - id: BIC
   name: "BIC"
-  color: "#9b59b6"
+  color: "#ffe100"
+
   

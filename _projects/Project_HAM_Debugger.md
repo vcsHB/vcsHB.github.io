@@ -1,9 +1,9 @@
 ---
 layout: default
 title: "HAM_Debugger"
-description: "Log 및 CMD창을 이용한 Unity 전용 디버깅이 가능합니다. 커스터마이징 및 확장이 가능합니다."
+description: "Log 및 CMD창을 이용한 Unity 전용 디버깅 도구입니다.<br>내장 클래스를 활용하여 기능 확장이 가능합니다."
 thumbnail: "/assets/Thumbnails/Logo_HAM_Debugger.png"
-categories: ["Unity", "Asset"]  # Category Id
+categories: ["SingleProject", "Unity", "Asset"]  # Category Id
 order: 10
 color : "#ff7300"
 ---

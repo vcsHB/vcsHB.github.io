@@ -3,7 +3,7 @@ layout: default
 title: "BLAST"
 description: ""
 thumbnail: "/assets/Thumbnails/Title_BLAST.png"
-categories: ["Unity"]  # Category Id
+categories: ["TeamProject", "Unity", "Award"]  # Category Id
 order: 1
 color : "#4287f5"
 ---
