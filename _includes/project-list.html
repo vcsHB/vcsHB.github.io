@@ -170,6 +170,12 @@
 </div>
 
 <script>
+    window.onload = function () {
+        setTimeout(function () {
+            window.scrollTo(0, 0);
+        }, 10);
+    };
+
     window.addEventListener('DOMContentLoaded', () => {
         const urlParams = new URLSearchParams(window.location.search);
         const targetTab = urlParams.get('tab');
@@ -206,7 +212,7 @@
         // ...... hm
         if (tabName) {
             const tabcontent = document.getElementsByClassName("tab-content");
-            for (let i = 0; i < tabcontent.length; i++) { 
+            for (let i = 0; i < tabcontent.length; i++) {
                 tabcontent[i].style.display = "none";
                 tabcontent[i].classList.remove("active");
             }
