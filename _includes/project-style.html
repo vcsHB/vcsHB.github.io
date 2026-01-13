@@ -523,6 +523,51 @@
         font-size: 1.05rem;
     }
 
+    .review-section {
+        margin-top: 40px;
+        padding: 25px;
+        border-radius: 15px;
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        position: relative;
+    }
+
+    [data-theme='dark'] .review-section {
+        background: rgba(255, 255, 255, 0.03);
+    }
+
+    .review-title {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 800;
+        font-size: 1.2rem;
+        margin-bottom: 15px;
+        color: var(--accent-color);
+    }
+
+    .review-title::before {
+        content: '🔍';
+        font-size: 1.1rem;
+    }
+
+    .review-content {
+        font-size: 0.95rem;
+        line-height: 1.7;
+        color: var(--text-color);
+        opacity: 0.9;
+    }
+
+    .review-tag {
+        display: inline-block;
+        padding: 2px 8px;
+        border-radius: 5px;
+        font-size: 0.8rem;
+        background: var(--gauge-bg);
+        margin-bottom: 10px;
+        font-family: monospace;
+    }
+
     @keyframes fadeIn {
         from { opacity: 0; }
         to { opacity: 1; }
