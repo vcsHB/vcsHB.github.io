@@ -1,11 +1,11 @@
 ---
 layout: default
-title: "NightCode"
-description: ""
-thumbnail: "/assets/Thumbnails/GIGDC_Ducking_Title_Image.png"
-categories: ["TeamProject", "Unity", "Award", "BIC", "PlayX4"]  # Category Id
-order: 2
-color : "#c626b3ff"
+title: "OXIDATION"
+description: "2D 공장 시뮬레이션 디펜스 게임입니다."
+thumbnail: "/assets/Thumbnails/Oxidation_Title.png"
+categories: ["TeamProject", "Unity", "Award"]  # Category Id
+order: 6
+color : "#ff7b0094"
 ---
 
 ## 📕 개요
@@ -16,9 +16,9 @@ color : "#c626b3ff"
 </style>
 <div class="equal-table">
 
-| 제목 | NightCode |
+| 제목 | OXIDATION |
 | --- | --- |
-| 장르 | 3D / 실시간 / 턴제  / 퍼즐 |
+| 장르 | 2D / 디펜스 / 공장 |
 | 플랫폼 | Windows |
 | 다운로드 | 🔗[구글 드라이브](https://store.onstove.com/en/games/4039) |
 
@@ -27,11 +27,11 @@ color : "#c626b3ff"
 <div style="flex: 1; width: 50%;">
 <div class="equal-table">
 
-| 깃허브 | 🔗[NightCode Git](https://github.com/vcsHB/AVOID) |
+| 깃허브 | 🔗[OXIDATION Git](https://github.com/vcsHB/AVOID) |
 | --- | --- |
 | 개발 환경 | Unity / C# |
-| 개발 인원 | 4인 팀 |
-| 역할 | 개발 / 아트 |
+| 개발 인원 | 3인 팀 |
+| 역할 | 기획 / 개발 / 아트 |
 
 </div>
 </div>

@@ -2,7 +2,7 @@
 layout: default
 title: "AVOID"
 description: "3D 실시간 턴제 퍼즐 게임입니다."
-thumbnail: "/assets/Thumbnails/Default_Thumbnail.png"
+thumbnail: "/assets/Thumbnails/AVOID_SubTitle.png"
 categories: ["SingleProject", "Unity", "Award"]  # Category Id
 order: 4
 color : "#5c5c5c"
