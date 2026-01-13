@@ -53,4 +53,26 @@
             window.history.pushState({}, '', newUrl);
         }
     }
+
+
+    function toggleReview(reviewId) {
+        document.querySelectorAll('.review-display-box').forEach(box => {
+            box.classList.remove('active');
+        });
+
+        document.querySelectorAll('.review-item-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+
+        const target = document.getElementById('review-' + reviewId);
+        if (target) {
+            target.classList.add('active');
+            event.currentTarget.classList.add('active');
+
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'nearest'
+            });
+        }
+    }
 </script>

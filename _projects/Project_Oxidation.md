@@ -39,11 +39,35 @@ color : "#ff7b0094"
 
 ## 💻 주요 기능 개발 리스트
 
-
 <div class="review-section">
-    <div class="review-tag">Code Review</div>
-    <div class="review-title">TEST Title</div>
-    <div class="review-content">
-        TESTCONTENT
+    <div class="review-title">
+        코드 리뷰 목차
+    </div>
+    
+   <div class="review-index">
+        <button class="review-item-btn" onclick="toggleReview('logic')">
+            1. 로직 최적화 (Algorithm) <span>▼</span>
+        </button>
+        <button class="review-item-btn" onclick="toggleReview('memory')">
+            2. 메모리 관리 (Memory) <span>▼</span>
+        </button>
+        <button class="review-item-btn" onclick="toggleReview('ui')">
+            3. UI/UX 개선 (Interface) <span>▼</span>
+        </button>
+    </div>
+
+   <div id="review-logic" class="review-display-box">
+        <div class="review-tag">Algorithm</div>
+        <p class="review-content">불필요한 이중 루프를 제거하고 해시맵을 도입하여 탐색 속도를 개선했습니다.</p>
+    </div>
+
+   <div id="review-memory" class="review-display-box">
+        <div class="review-tag">Memory</div>
+        <p class="review-content">오브젝트 풀링을 적용하여 프레임 드랍 현상을 해결했습니다.</p>
+    </div>
+
+   <div id="review-ui" class="review-display-box">
+        <div class="review-tag">Interface</div>
+        <p class="review-content">반응형 레이아웃을 적용하여 모바일 환경에서의 가독성을 높였습니다.</p>
     </div>
 </div>
