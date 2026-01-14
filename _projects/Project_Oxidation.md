@@ -43,10 +43,10 @@ color : "#ff7b0094"
     </div>
     
    <div class="review-index">
-        <button class="review-item-btn" onclick="toggleReview('pathFinding')">
+        <button class="review-item-btn" onclick="toggleReview(event, 'pathFinding')">
             1. Enemy PathFinding AI - A* 알고리즘 활용 <span>▼</span>
         </button>
-        <button class="review-item-btn" onclick="toggleReview('buildingUI')">
+        <button class="review-item-btn" onclick="toggleReview(event, 'buildingUI')">
             2. Building UIs - MVP, MVVM 패턴 활용 <span>▼</span>
         </button>
     </div>
