@@ -51,10 +51,10 @@ color : "#ff7b0094"
         </button>
     </div>
 
-   <div id="review-pathFinding" class="review-display-box">
-        <div class="review-tag">🔎 Enemy PathFinding AI - A* 알고리즘 활용</div>
-        <div class="review-content">
-        
+<div id="review-pathFinding" class="review-display-box">
+<div class="review-tag">🔎 Enemy PathFinding AI - A* 알고리즘 활용</div>
+<div class="review-content">
+
 Astar 알고리즘을 활용하여 적들이 몰려오는 경로를 탐색하고 최종적으로 플레이어의 베이스를 부수는 적의 AI를 개발했습니다. 
 
 🔗[깃허브 PathFinder.cs](https://github.com/vcsHB/DUCKING/blob/main/Assets/01.Scripts/Agent/Enemy/PathFinder.cs)
@@ -103,7 +103,6 @@ GetHeuristic함수를 통해 경로 탐색의 최종목표 지점으로의 대�
 
 혹시나 이런일이 또 발생하지 않게 하고자 만든 예외처리입니다.
 
-
 </div>
 </div>
 
@@ -117,6 +116,6 @@ GetHeuristic함수를 통해 경로 탐색의 최종목표 지점으로의 대�
 🔗[깃허브 FactoryBuildingDetailInfoPanel.cs](https://github.com/vcsHB/DUCKING/blob/main/Assets/01.Scripts/UI/InGame/InfoPanel/FactoryBuildingDetailInfoPanel.cs)
 
 </div>
-
 </div>
+
 </div>
