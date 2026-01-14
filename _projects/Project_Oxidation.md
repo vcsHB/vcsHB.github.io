@@ -51,7 +51,7 @@ color : "#ff7b0094"
         </button>
     </div>
 
-<div id="review-pathFinding" class="review-display-box">
+<div id="review-pathFinding" class="review-display-box" markdown="1">
 <div class="review-tag">🔎 Enemy PathFinding AI - A* 알고리즘 활용</div>
 <div class="review-content">
 
@@ -106,7 +106,7 @@ GetHeuristic함수를 통해 경로 탐색의 최종목표 지점으로의 대�
 </div>
 </div>
 
-<div id="review-buildingUI" class="review-display-box">
+<div id="review-buildingUI" class="review-display-box" markdown="1">
 <div class="review-tag">🖥️ Building Detail UI - MVP, MVVM 패턴 활용</div>
 <div class="review-content">
 
