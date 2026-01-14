@@ -56,19 +56,18 @@
 
 
     function toggleReview(event, reviewId) {
-        document.querySelectorAll('.review-display-box').forEach(box => {
-            box.classList.remove('active');
-        });
-        document.querySelectorAll('.review-item-btn').forEach(btn => {
-            btn.classList.remove('active');
-        });
+        const boxes = document.querySelectorAll('.review-display-box');
+        boxes.forEach(box => box.style.display = 'none');
+
+        const buttons = document.querySelectorAll('.review-item-btn');
+        buttons.forEach(btn => btn.classList.remove('active'));
 
         const target = document.getElementById('review-' + reviewId);
         if (target) {
-            target.classList.add('active');
+            target.style.display = 'block';
 
-            const clickedBtn = event.target.closest('.review-item-btn');
-            if (clickedBtn) clickedBtn.classList.add('active');
+            const btn = event.target.closest('.review-item-btn');
+            if (btn) btn.classList.add('active');
 
             target.scrollIntoView({
                 behavior: 'smooth',
