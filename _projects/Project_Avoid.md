@@ -37,6 +37,36 @@ color : "#5c5c5c"
 </div>
 </div>
 
+<div class="review-section">
+    <div class="review-title">
+        ## 💻 주요 기능 개발 리스트
+    </div>
+    
+   <div class="review-index">
+        <button class="review-item-btn" onclick="toggleReview('moveInteract')">
+            1. **MOVE to INTERACT System** - 움직임을 통한 상호작용<span>▼</span>
+        </button>
+        <button class="review-item-btn" onclick="toggleReview('stageManage')">
+            2. **Stage Manage System** - 스테이지 동적 생성 및 관리 <span>▼</span>
+        </button>
+    </div>
+
+   <div id="review-moveInteract" class="review-display-box">
+        <div class="review-tag">Algorithm</div>
+        <p class="review-content">
+        
+        
+        </p>
+    </div>
+
+   <div id="review-stageManage" class="review-display-box">
+        <div class="review-tag">Memory</div>
+        <p class="review-content">오브젝트 풀링을 적용하여 프레임 드랍 현상을 해결했습니다.</p>
+    </div>
+</div>
+
+
+
 ## 💻 주요 기능 개발 리스트
 
 - **MOVE to INTERACT System** - 움직임을 통한 상호작용<br>
