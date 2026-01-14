@@ -51,9 +51,9 @@ color : "#ff7b0094"
         </button>
     </div>
 
-<div id="review-pathFinding" class="review-display-box" markdown="1">
+<div id="review-pathFinding" class="review-display-box">
 <div class="review-tag">🔎 Enemy PathFinding AI - A* 알고리즘 활용</div>
-<div class="review-content">
+<div class="review-content" markdown="1">
 
 Astar 알고리즘을 활용하여 적들이 몰려오는 경로를 탐색하고 최종적으로 플레이어의 베이스를 부수는 적의 AI를 개발했습니다. 
 
@@ -106,9 +106,9 @@ GetHeuristic함수를 통해 경로 탐색의 최종목표 지점으로의 대�
 </div>
 </div>
 
-<div id="review-buildingUI" class="review-display-box" markdown="1">
+<div id="review-buildingUI" class="review-display-box">
 <div class="review-tag">🖥️ Building Detail UI - MVP, MVVM 패턴 활용</div>
-<div class="review-content">
+<div class="review-content" markdown="1">
 
 각종 건물과 포탑들에 따른 정보를 MVP, MVVM 패턴을 활용하여 사용자 친화적인 UI로 제작했습니다.
 
