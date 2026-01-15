@@ -36,7 +36,7 @@ color : "#ff7b0094"
 </div>
 </div>
 </div>
-<div class="review-section">
+<div class="review-section" style="--review-accent: var(--hover-color);">
 <div class="review-title">
 <h2>💻 주요 기능 개발 리스트</h2>
 </div>
