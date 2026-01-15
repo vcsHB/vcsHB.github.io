@@ -37,27 +37,45 @@ color : "#000000"
 </div>
 </div>
 
-<div class="review-section">
-    <div class="review-title">
-        ## 💻 주요 기능 개발 리스트
-    </div>
-    
-   <div class="review-index">
-        <button class="review-item-btn" onclick="toggleReview('logic')">
-            1. LOGIC REFACTOR <span>▼</span>
-        </button>
-        <button class="review-item-btn" onclick="toggleReview('memory')">
-            2. MEMORY MANAGE REFACTOR <span>▼</span>
-        </button>
-    </div>
+</div>
+</div>
+</div>
 
-   <div id="review-logic" class="review-display-box">
-        <div class="review-tag">LOGIC</div>
-        <p class="review-content">REVIEW CONTENT 1</p>
-    </div>
 
-   <div id="review-memory" class="review-display-box">
-        <div class="review-tag">MEMORY MANAGE</div>
-        <p class="review-content">REVIEW CONTENT 2</p>
-    </div>
+<div class="review-section" style="--review-accent: {{ page.color }};">
+<div class="review-title">
+<h2>💻 주요 기능 개발 리스트</h2>
+</div>
+
+<div class="review-index">
+<button class="review-item-btn" onclick="toggleReview(event, '**function_1')">
+1. FUNCTION_1 <span>▼</span>
+</button>
+<button class="review-item-btn" onclick="toggleReview(event, '**function_2')">
+2. FUNCTION_2 <span>▼</span>
+</button>
+</div>
+
+<div id="review-**function_1" class="review-display-box">
+<div class="review-tag">🔎 **FUNCTION_1</div>
+<div class="review-content">
+
+<p>
+Content
+</p>
+
+
+</div>
+</div>
+
+<div id="review-**function_2" class="review-display-box">
+<div class="review-tag">🖥️ **FUNCTION_2</div>
+<div class="review-content">
+
+<p>
+Content2
+</p>
+
+</div>
+</div>
 </div>
