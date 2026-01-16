@@ -116,7 +116,7 @@ Joint의 몇가지 옵션들을 설정하여 가장 로프같으면서도 조작
 </p>
 <img src="../assets/ReferenceData/ProjectNightCode/Image_NightCode_3.png" height="250" style="border-radius:8px;">
 <p>
-이를 위해 이벤트 채널을 활용하였습니다. EventChannelBase를 상속받아 구현된 StateChnage클래스를 만들고 이벤트가 발행되었을때 하위 트리 전체를 몽땅 재시작하게끔 구성하면, FSM과 같이 언제든지 원할 때에 스테이트를 탈출 가능한 BT가 완성됩니다.
+이를 위해 이벤트 채널을 활용하였습니다. EventChannelBase를 상속받아 구현된 StateChange클래스를 만들고 이벤트가 발행되었을때 하위 트리 전체를 몽땅 재시작하게끔 구성하면, FSM과 같이 언제든지 원할 때에 스테이트를 탈출 가능한 BT가 완성됩니다.
 </p>
 <img src="../assets/ReferenceData/ProjectNightCode/Image_NightCode_4.png" height="300" style="border-radius:8px;">
 
