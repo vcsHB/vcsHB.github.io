@@ -118,14 +118,14 @@ Joint의 몇가지 옵션들을 설정하여 가장 로프같으면서도 조작
 <p>
 이를 위해 이벤트 채널을 활용하였습니다. EventChannelBase를 상속받아 구현된 StateChnage클래스를 만들고 이벤트가 발행되었을때 하위 트리 전체를 몽땅 재시작하게끔 구성하면, FSM과 같이 언제든지 원할 때에 스테이트를 탈출 가능한 BT가 완성됩니다.
 </p>
-<img src="../assets/ReferenceData/ProjectNightCode/Image_NightCode_4.png" height="500" style="border-radius:8px;">
+<img src="../assets/ReferenceData/ProjectNightCode/Image_NightCode_4.png" height="300" style="border-radius:8px;">
 
 <h2> 💻 1챕터 보스 개발에 BT 활용 </h2>
 <p>
 1챕터 보스 “BurnOut”은 총 5가지의 행동을 취하고 각각의 행동이 조건에 따라 복잡하게 흘러가므로 이러한 개발에 적절한 Behaviour Tree를 활용하였습니다.
 </p>
 
-<img src="../assets/ReferenceData/ProjectNightCode/GIF_NightCode_2.gif" height="450" style="border-radius:8px;">
+<img src="../assets/ReferenceData/ProjectNightCode/GIF_NightCode_2.gif" height="350" style="border-radius:8px;">
 <img src="../assets/ReferenceData/ProjectNightCode/Image_NightCode_5.png" height="200" style="border-radius:8px;">
 
 <p>
