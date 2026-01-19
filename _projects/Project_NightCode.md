@@ -100,7 +100,9 @@ Joint의 몇가지 옵션들을 설정하여 가장 로프같으면서도 조작
 
 <h2>👩‍🦲 일반 Enemy AI : Patrol, Idle 등등 구현</h2>
 <p>
-전투와 적 AI를 개발했습니다.  🔗[깃허브 Enemy BT](https://github.com/vcsHB/MaidInDDUCKING/tree/main/Assets/01.Scripts/Agent/Enemy/BT)
+전투와 적 AI를 개발했습니다.  
+
+🔗[깃허브 Enemy BT](https://github.com/vcsHB/MaidInDDUCKING/tree/main/Assets/01.Scripts/Agent/Enemy/BT)
 
 적들이 가지는 복잡한 행동 방식과 순서를 조건에 따라 분기하고 우선순위를 더욱 가시적이고 유연하게 확장하기 쉽도록 제작할 수 있는 Behavior Tree를 사용하여 적의 AI를 개발했습니다.
 </p>
