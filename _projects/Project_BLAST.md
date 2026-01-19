@@ -70,7 +70,7 @@ FSM 구조 에서 일부 영감을 받아 Entity의 버프 디버프 시스템�
 엔티티 Agent개체 하나하나가 **EffectController**를 가지고 있고. Controller가 EffectState들을 Dictionary로 가지고 있으며 매 프레임 Update해줍니다. EffectState는 enable, 활성화 되어있는지(해당 버프 이펙트를 가지고 있는지), 이펙트의 레벨과 지속시간을 가지고. Controller는 이펙트가 캐스팅되면 Start(), enable일때 Update() 해줍니다.
 </p>
 
-<img src="..\assets\ReferenceData\ProjectBlast\Image_Blast_1.png" height="300px" style ="border-radius: 8px;"/>
+<img src="..\assets\ReferenceData\ProjectBlast\Image_Blast_1.png" height="250px" style ="border-radius: 8px;"/>
 
  🔗[티스토리 디버프 시스템 개발 글](https://dev-vcs.tistory.com/entry/BLAST-%EA%B0%9C%EB%B0%9C-%EA%B8%B0%EB%A1%9D-Effect-System-%EA%B0%9C%EB%B0%9C)
 
@@ -191,7 +191,7 @@ Model로 부터 해금된 파츠에 대한 데이터, 그리고 현재 장착하
 
 **OIL TERROR**는 바닥에 기름을 말 그대로 뿌려버리는 스킬입니다. 그래서 이게 무엇을 하는가하면..
 </p>
-<h3>🔥불이 근처에서 발생하면 기름에 불이 옮겨 붙습니다. </h4>
+<h4>🔥불이 근처에서 발생하면 기름에 불이 옮겨 붙습니다. </h4>
 <p>
 대표적으로는 플레이어의 화염방사 공격, 네이팜 스킬등이 있습니다.
 </p>
