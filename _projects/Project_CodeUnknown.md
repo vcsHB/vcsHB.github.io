@@ -2,7 +2,7 @@
 layout: default
 title: "Code:Unknown"
 description: "2D 모바일 로그라이트 게임입니다."
-thumbnail: "/assets/Thumbnails/AVOID_SubTitle.png"
+thumbnail: "/assets/Thumbnails/CodeUnkncown_Title.png"
 categories: ["TeamProject", "Unity", "Award"]  # Category Id
 order: 4
 color : "#dc3c18"

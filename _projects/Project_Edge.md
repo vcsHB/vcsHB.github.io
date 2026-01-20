@@ -2,7 +2,7 @@
 layout: default
 title: "EDGE"
 description: "3D 실시간 턴제 퍼즐 게임입니다."
-thumbnail: "/assets/Thumbnails/AVOID_SubTitle.png"
+thumbnail: "/assets/Thumbnails/Edge_Title.png"
 categories: ["TeamProject", "Unity", "Award"]  # Category Id
 order: 4
 color : "#8965ff"
@@ -89,7 +89,6 @@ Edge는 화면 끝 네 모서리에 MovePoint들을 가지고 있습니다.
 </div>
 </div>
 
-
 <div id="review-moveEdge" class="review-display-box">
 <div class="review-tag">↔️ EDGE Movement System - 모서리 이동 시스템</div>
 <div class="review-content">
@@ -129,6 +128,7 @@ FSM을 통해 넘어온 이동 진행 비율 (ratio)를 받아 위치를 보간 
 <div id="review-soundManage" class="review-display-box">
 <div class="review-tag">🔊 SOUND Manage System - 사운드 관리 시스템</div>
 <div class="review-content">
+
 <p>
 사운드 클립과 랜덤 pitch 등의 상세 효과 정보들을 가지고있는 Sound Scriptable Object를 만들고 이를 재생해주는 SoundPlayer를 풀링 처리하여 재사용 가능한 SFX 기능을 구현했습니다.
 
