@@ -5,7 +5,7 @@ description: "2D 모바일 로그라이트 게임입니다."
 thumbnail: "/assets/Thumbnails/AVOID_SubTitle.png"
 categories: ["TeamProject", "Unity", "Award"]  # Category Id
 order: 4
-color : "#5c5c5c"
+color : "#dc3c18"
 ---
 
 ## 📕 개요
@@ -106,12 +106,12 @@ FSM 패턴은 학교 수업 시간에 배웠던 구조를 응용하여 개발했
 
 <img src="..\assets\ReferenceData\ProjectCodeUnknown\Image_CodeUnknown_5.png" height="180px" style ="border-radius: 8px;"/>
 <p>
-컨트롤러 생성을 통해 장착가능한 파츠의 스킬 효과를 SO로 분리하였습니다.ScriptableObject의 변경만으로 스킬의 기능이 변경될 수 있도록 스킬의 텍스트정보와 아이콘등을 ScriptableObject내에 담고, 실질적인 스킬의 기능을 Prefab화 시켜 SO내에 넣고, SO를 Controller가 넘겨 받았을 때 프리팹을 생성하여 사용할 수 있도록 구조를 짰습니다.
+컨트롤러 생성을 통해 장착가능한 파츠의 스킬 효과를 SO로 분리하였습니다.
+ScriptableObject의 변경만으로 스킬의 기능이 변경될 수 있도록 스킬의 텍스트 정보와 아이콘등을 ScriptableObject내에 담고, 실질적인 스킬의 기능을 Prefab화 시켜 SO내에 넣었습니다. SO를 Controller가 넘겨 받았을 때 프리팹을 생성하여 사용할 수 있도록 구조를 짰습니다.
 
 🔗[티스토리 - PlayerSkillSystem 개발 글](https://dev-vcs.tistory.com/entry/STAC-%EA%B0%9C%EB%B0%9C%EC%9D%BC%EC%A7%80-%EC%8A%A4%ED%83%9D-%EA%B0%9C%EB%B0%9C%EC%9D%BC%EC%A7%80-4-Player-Skill-System)
 </p>
 
 </div>
 </div>
-
 </div>
