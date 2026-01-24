@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "EDGE"
-description: "3D 실시간 턴제 퍼즐 게임입니다."
+description: "2D 모서리를 타고 이동하는 디펜스 게임입니다."
 thumbnail: "/assets/Thumbnails/Edge_Title.png"
 categories: ["TeamProject", "Unity", "Award"]  # Category Id
 order: 4
@@ -27,10 +27,10 @@ color : "#8965ff"
 <div style="flex: 1; width: 50%;">
 <div class="equal-table">
 
-| 깃허브 | 🔗[AVOID Git](https://github.com/vcsHB/AVOID) |
+| 깃허브 | 🔗[EDGE Git](https://github.com/vcsHB/Edge) |
 | --- | --- |
 | 개발 환경 | Unity / C# |
-| 개발 인원 | 1인 팀 |
+| 개발 인원 | 5인 팀 |
 | 역할 | 기획 / 개발 / 아트 |
 
 </div>

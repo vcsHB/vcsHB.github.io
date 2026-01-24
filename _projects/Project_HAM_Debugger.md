@@ -27,7 +27,7 @@ color : "#ff7300"
 
 | 깃허브 | 🔗[HAM_Debugger Git](https://github.com/vcsHB/HAM_Debugger) |
 | --- | --- |
-| 개발 인원 | 1인 |
+| 개발 인원 | 1인 개발 |
 
 </div>
 </div>

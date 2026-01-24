@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Code:Unknown"
-description: "2D 모바일 로그라이트 게임입니다."
+description: "2D 해킹 로그라이트 게임입니다."
 thumbnail: "/assets/Thumbnails/CodeUnkncown_Title.png"
 categories: ["TeamProject", "Unity", "Award"]  # Category Id
 order: 4
@@ -58,7 +58,7 @@ color : "#dc3c18"
 <div id="review-objectPooling" class="review-display-box">
 <div class="review-tag">🔄 Object Pooling  - 오브젝트 풀링 최적화 기능</div>
 <div class="review-content">
-<img src="..\assets\ReferenceData\ProjectCodeUnknown\Image_CodeUnknown_1.png" height="300px" style ="border-radius: 8px;"/>
+<img src="..\assets\ReferenceData\ProjectCodeUnknown\Image_CodeUnknown_1.png" style ="border-radius: 8px;"/>
 
 <p>
 오브젝트 풀링을 활용해 각종 VFX와 SFX, 반복적으로 재사용되는 여러 오브젝트들을 관리했습니다. 기존에 여러 프로젝트에서 당시 사용하던 풀링 시스템이 새롭게 알게된 SOLID법칙에 위배된다는 것을 알게되었습니다. 

@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "NightCode"
-description: ""
+description: "2D 로프액션 로그라이크 게임입니다."
 thumbnail: "/assets/Thumbnails/GIGDC_Ducking_Title_Image.png"
 categories: ["TeamProject", "Unity", "Award", "BIC", "PlayX4"]  # Category Id
 order: 2

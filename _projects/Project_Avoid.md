@@ -30,7 +30,7 @@ color : "#5c5c5c"
 | 깃허브 | 🔗[AVOID Git](https://github.com/vcsHB/AVOID) |
 | --- | --- |
 | 개발 환경 | Unity / C# |
-| 개발 인원 | 1인 팀 |
+| 개발 인원 | 1인 개발 |
 | 역할 | 기획 / 개발 / 아트 |
 
 </div>
