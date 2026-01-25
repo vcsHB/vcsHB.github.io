@@ -33,22 +33,39 @@ color : "#ff7300"
 </div>
 </div>
 
+<div class="review-section" style="--review-accent: {{ page.color }};">
+<div class="review-title">
+<h2>💻 주요 기능 개발 리스트</h2>
+</div>
 
-## 💻 주요 기능
-- **CMD Console Window** 기반 에디터
-- **Object Clipboard** 
+<div class="review-index">
+<button class="review-item-btn" onclick="toggleReview(event, 'cmdEditor')">
+1. CMD Console Window - Cmd 기반 에디터<span>▼</span>
+</button>
+<button class="review-item-btn" onclick="toggleReview(event, 'objectClipboard')">
+2. PiklipBoard - 오브젝트 클립보드 에디터 <span>▼</span>
+</button>
+</div>
 
+<div id="review-cmdEditor" class="review-display-box">
+<div class="review-tag">🪟 CMD Console Window 기반 에디터</div>
+<div class="review-content">
 
-## 🪟 CMD Console Window 기반 에디터
 CMD 창을 Unity에 적용시켜 지정된 명령어를 입력하면 특정 작업을 수행하도록 확장 가능한 디버깅 툴입니다.
 
-<br>
-<hr>
-<br>
 
 
-## 📋 Object Clipboard
+</div>
+</div>
+
+<div id="review-objectClipboard" class="review-display-box">
+<div class="review-tag">📋 PiklipBoard - 오브젝트 클립보드 에디터</div>
+<div class="review-content">
+
 오브젝트 및 각종 파일들을 Reference로 담아둘 수 있는 '클립보드' 입니다.
+기본적으로 프로젝트창에 있는 에셋의 레퍼런스를 저장하여 EditorPrefs에 저장합니다.
 
+</div>
+</div>
 
-    
+</div>
