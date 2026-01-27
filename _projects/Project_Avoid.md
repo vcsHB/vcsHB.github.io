@@ -7,7 +7,13 @@ categories: ["SingleProject", "Unity", "Award"]  # Category Id
 order: 4
 color : "#5c5c5c"
 ---
-
+<div align="center">
+  <iframe width="100%" height="400" src="https://www.youtube.com/watch?v=hnU119tILjc" 
+    title="YouTube video player" frameborder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+    allowfullscreen style="border-radius: 12px;">
+  </iframe>
+</div>
 ## 📕 개요
 <div style="display: flex; width: 100%; gap: 10px; justify-content: space-between;">
 <div style="flex: 1; width: 50%;">
