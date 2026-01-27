@@ -20,14 +20,14 @@ color : "#868686"
 | --- | --- |
 | 장르 | 2D / 화면 조작 / 탄막 / 슈팅 |
 | 플랫폼 | Windows |
-| 다운로드 | 🔗[구글 드라이브](https://store.onstove.com/en/games/4039) |
+| 다운로드 | 🔗[구글 드라이브](https://drive.google.com/drive/folders/1pjWMZK-E237ximVBFSdq1-haXcVuid-T) |
 
 </div>
 </div>
 <div style="flex: 1; width: 50%;">
 <div class="equal-table">
 
-| 깃허브 | 🔗[Eclipse Git](https://github.com/GapMoeGroupMeister/BLAST) |
+| 깃허브 | 🔗[Eclipse Git](https://github.com/vcsHB/TheEclipse) |
 | --- | --- |
 | 개발 환경 | Win32Api / C++ |
 | 개발 인원 | 2인 팀(개발 2) |
