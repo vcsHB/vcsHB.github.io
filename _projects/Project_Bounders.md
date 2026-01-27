@@ -2,7 +2,7 @@
 layout: default
 title: "BOUNDERS"
 description: "AI 강화학습 기반 PVE와 로컬 멀티 대전을 지원하는 핑퐁라이크 게임입니다."
-thumbnail: "/assets/Thumbnails/Default_Thumbnail.png"
+thumbnail: "/assets/Thumbnails/Project_BOUNDERS_Thumbnail.png"
 categories: ["SingleProject", "Unity"]  # Category Id
 order: 4
 color : "#00ffc8"
