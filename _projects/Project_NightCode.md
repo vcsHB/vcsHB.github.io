@@ -18,7 +18,7 @@ color : "#c626b3ff"
 
 | 제목 | NightCode |
 | --- | --- |
-| 장르 | 3D / 실시간 / 턴제  / 퍼즐 |
+| 장르 | 2D / 로프액션 / 로그라이크 |
 | 플랫폼 | Windows |
 | 다운로드 | 🔗[구글 드라이브](https://store.onstove.com/en/games/4039) |
 

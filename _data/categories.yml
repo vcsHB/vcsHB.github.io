@@ -17,6 +17,9 @@
 - id: Unity
   name: "Unity"
   color: "#828282"
+- id: WinAPI
+  name: "Win32API"
+  color: "#8bd4ff"
 - id: Cpp
   name: "C++"
   color: "#386de0"
