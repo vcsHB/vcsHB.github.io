@@ -10,7 +10,7 @@
   <tr style="background-color: #21262d;">
     <td style="padding: 20px; border-radius: 12px;">
       <img src="https://img.shields.io/badge/Game_Design-FF5733?style=flat-square&logo=unity&logoColor=white"><br>
-      <span style="color: #ffffff;">게임의 재미는 무엇인지 항상 깊게 생각하고 이를 구현으로 이끌어내기 위해 고민합니다.</span>
+      <span style="color: #ffffff;">게임의 재미는 무엇인지 항상 깊게 생각하고, 구현으로 이끌어내기 위해 고민합니다.</span>
       <br>
       <hr>
       <img src="https://img.shields.io/badge/New_Tech_Hunter-338057?style=flat-square&logo=google-cloud&logoColor=white"><br>
@@ -33,7 +33,7 @@
   <tr style="background-color: #21262d; ">
     <td style="padding: 15px; border-radius: 12px; color: #1af483;">
       <strong>다양한 객체지향 디자인 패턴에 대한 이해도를 가지고 있고 프로젝트에 응용할 수 있습니다.</strong><br><br>
-      <ul>
+      <ul style="color: #ffffff;">
         <li><strong>Advanced Tools:</strong> Unity 6 Behaviour Tree, ShaderGraph, Localization 등 활용</li>
         <li><strong>Versatility:</strong> 장르 불문, 기획부터 구현까지 능숙하고 빠른 개발 프로세스 보유</li>
         <li><strong>Architecture:</strong> 유지보수에 용이한 객체지향적 설계 지향</li>
@@ -51,7 +51,7 @@
   <tr style="background-color: #21262d;">
     <td style="padding: 15px; border-radius: 12px; color: #1edaff;">
       <strong>Win32 API 기반의 게임 프레임워크 설계 및 엔진의 핵심 구조를 직접 구현합니다.</strong><br><br>
-      <ul>
+      <ul style="color: #ffffff;">
         <li><strong>Core Engine:</strong> 좌표계 처리, 컴포넌트 패턴 UI, 오브젝트 풀링 등 시스템 자체 제작</li>
         <li><strong>Performance:</strong> 리소스 최적화가 핵심인 2D 탄막 게임 구현 및 메모리 관리 능력 보유</li>
         <li><strong>Networking:</strong> LockStep 기법 기반의 RTS 시뮬레이터 로직 분석 및 유지보수</li>
