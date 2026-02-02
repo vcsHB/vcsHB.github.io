@@ -50,10 +50,18 @@ color : "#ff7300"
 <div id="review-cmdEditor" class="review-display-box">
 <div class="review-tag">🪟 CMD Console Window 기반 에디터</div>
 <div class="review-content">
-
-CMD 창을 Unity에 적용시켜 지정된 명령어를 입력하면 특정 작업을 수행하도록 확장 가능한 디버깅 툴입니다.
-
-
+<p>
+Unity에 CMD console을 접목시켜 지정된 명령어를 입력하면 특정 작업을 수행하도록 확장 가능한 디버깅 툴입니다.
+</p>
+<img src="../assets/ReferenceData/ProjectHamdebugger/GIF_Hamdebugger.gif" style="border-radius:8px;">
+<p>
+특정 클래스를 상속, Attribute만을 통해 자유로운 명령어 확장이 가능하며
+ 
+</p>
+<img src="../assets/ReferenceData/ProjectHamdebugger/Image_Hamdebugger.png" style="border-radius:8px;">
+<p>
+직접 Command Parser를 구현하여 토큰으로 분할된 명령어들이 의도에 맞도록 제 기능을 할 수 있도록 구조를 개발했습니다.
+</p>
 
 </div>
 </div>
@@ -61,9 +69,14 @@ CMD 창을 Unity에 적용시켜 지정된 명령어를 입력하면 특정 작�
 <div id="review-objectClipboard" class="review-display-box">
 <div class="review-tag">📋 PiklipBoard - 오브젝트 클립보드 에디터</div>
 <div class="review-content">
-
+<p>
 오브젝트 및 각종 파일들을 Reference로 담아둘 수 있는 '클립보드' 입니다.
 기본적으로 프로젝트창에 있는 에셋의 레퍼런스를 저장하여 EditorPrefs에 저장합니다.
+
+🔗[UnityAsset-ObjectClipboard](https://assetstore.unity.com/packages/tools/utilities/object-clipboard-126425?srsltid=AfmBOoo8YqxahgUuWGrKVtedOaTRhmk54lY10LOsYYTbLeK8zvk9NxAN) 에서 영감을 받아 제작하게 되었습니다.
+검색, 카테고리 필터 등의 기능들이 추가되어있습니다.
+</p>
+
 
 </div>
 </div>
