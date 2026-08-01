@@ -29,10 +29,20 @@
         color: var(--text-color);
         transition: background-color 0.3s, color 0.3s;
         margin: 0;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Apple SD Gothic Neo",
-            "Malgun Gothic", Roboto, "Helvetica Neue", sans-serif;
+        font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont,
+            "Segoe UI", "Apple SD Gothic Neo", Roboto, "Helvetica Neue", sans-serif;
         line-height: 1.6;
+        word-break: keep-all;
         -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* 버튼/입력은 폰트를 상속하지 않으므로 명시한다. */
+    button,
+    input,
+    textarea,
+    select {
+        font-family: inherit;
     }
 
     section {
@@ -134,24 +144,12 @@
         font-weight: bold;
     }
 
-    [data-theme='dark'] table {
-        background-color: var(--card-bg) !important;
-        color: var(--text-color) !important;
-        border-collapse: collapse;
-        width: 100%;
-    }
-
-    [data-theme='dark'] th,
-    [data-theme='dark'] td,
-    [data-theme='dark'] tr {
-        background-color: var(--card-bg) !important;
-        color: var(--text-color) !important;
-        border: 1px solid var(--card-border) !important;
-    }
-
-    [data-theme='dark'] th {
-        background-color: var(--gauge-bg) !important;
-    }
+    {%- comment -%}
+    이전에 있던 [data-theme='dark'] table/th/td/tr/a 오버라이드 블록은 제거했다.
+    위의 기본 규칙이 이미 CSS 변수를 쓰고 있어 전부 중복이었고,
+    !important 때문에 본문(특히 profile.md)의 색 지정이 다크모드에서만
+    강제로 덮어써져 라이트/다크가 서로 다른 디자인으로 보이는 원인이었다.
+    {%- endcomment -%}
 
     a {
         color: var(--accent-color);
@@ -161,10 +159,6 @@
     a:hover {
         text-decoration: underline;
         filter: brightness(1.2);
-    }
-
-    [data-theme='dark'] a {
-        color: #80dfff !important;
     }
 
 
@@ -479,20 +473,45 @@
 
     .history-item {
         position: relative;
-        margin-bottom: 50px;
+        margin-bottom: 36px;
     }
 
     .history-item::before {
         content: "";
         position: absolute;
         left: -42px;
-        top: 4px;
+        top: 6px;
         width: 12px;
         height: 12px;
         border-radius: 50%;
         background: var(--accent-color);
         border: 3px solid var(--bg-color);
         box-shadow: 0 0 0 1px var(--card-border);
+    }
+
+    /* 날짜가 본문과 같은 크기라 연표로 읽히지 않던 것을 위계로 분리한다. */
+    .history-date {
+        display: block;
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        color: var(--accent-color);
+        margin-bottom: 4px;
+    }
+
+    .history-info strong {
+        display: block;
+        font-size: 1.05rem;
+        font-weight: 700;
+        margin-bottom: 4px;
+    }
+
+    .history-info p {
+        margin: 0;
+        font-size: 0.9rem;
+        color: var(--sub-text);
+        /* history.yml의 description에 들어있는 줄바꿈(\n)을 그대로 살린다. */
+        white-space: pre-line;
     }
 
     .modal {
@@ -659,6 +678,77 @@
         background: var(--gauge-bg);
         margin-bottom: 10px;
         font-family: monospace;
+    }
+
+    /* ---------- 프로필 본문 (assets/profile.md) ----------
+       기존에는 GitHub README를 그대로 옮겨와 #21262d 같은 값이 인라인으로 박혀 있었다.
+       사이트 토큰(--card-bg / --sub-text)만 쓰도록 바꿔 두 테마에서 같은 디자인이 나오게 한다.
+       색 구분은 왼쪽 accent 바에만 남겨, 텍스트 가독성은 테마와 무관하게 유지한다. */
+    .profile-block {
+        background: var(--gauge-bg);
+        border: 1px solid var(--card-border);
+        border-left: 4px solid var(--block-accent, var(--accent-color));
+        border-radius: 12px;
+        padding: 18px 22px;
+        margin: 14px 0;
+    }
+
+    .profile-block .badge-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        align-items: center;
+        margin-bottom: 12px;
+    }
+
+    .profile-block .badge-row img {
+        display: block;
+        margin: 0;
+    }
+
+    .profile-block p {
+        margin: 0;
+        color: var(--text-color);
+        font-size: 0.95rem;
+    }
+
+    .profile-block .profile-lead {
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+
+    .profile-block ul {
+        margin: 0;
+        padding-left: 20px;
+        color: var(--sub-text);
+        font-size: 0.92rem;
+    }
+
+    .profile-block li {
+        margin-bottom: 6px;
+    }
+
+    .profile-block li:last-child {
+        margin-bottom: 0;
+    }
+
+    .profile-block li strong {
+        color: var(--text-color);
+    }
+
+    #profileReadmeContent h2 {
+        font-size: 1.25rem;
+        margin: 28px 0 12px 0;
+    }
+
+    #profileReadmeContent h2:first-child {
+        margin-top: 0;
+    }
+
+    #profileReadmeContent hr {
+        border: 0;
+        border-top: 1px solid var(--card-border);
+        margin: 26px 0;
     }
 
     /* ---------- 개별 프로젝트 페이지 (/projects/*.html) ---------- */

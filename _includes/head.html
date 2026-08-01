@@ -45,6 +45,14 @@
     {%- endcomment -%}
     <link rel="preconnect" href="https://cdn.jsdelivr.net">
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+
+    {%- comment -%}
+    Pretendard — 한글 본문용. dynamic-subset 버전은 필요한 글자만 내려받는다.
+    이게 없으면 Windows에서 맑은 고딕으로 떨어져 한글 인상이 크게 나빠진다.
+    {%- endcomment -%}
+    <link rel="stylesheet" as="style" crossorigin
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+
     <script defer src="https://cdn.jsdelivr.net/npm/marked@15.0.0/lib/marked.umd.min.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
