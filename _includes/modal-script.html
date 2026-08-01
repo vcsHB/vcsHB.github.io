@@ -1,11 +1,8 @@
-<script src="https://cdn.jsdelivr.net/npm/marked@15.0.0/lib/marked.umd.min.js">
-</script>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js">
-</script>
-
 <script>
+    // marked / prism 은 head.html 에서 defer로 한 번만 로드한다.
+
+    let lastFocusedCard = null;
+
     function openModal(cardElement, isInitialLoad = false) {
         const modal = document.getElementById("portfolioModal");
         const modalBody = document.getElementById("modalBody");
@@ -15,37 +12,55 @@
 
         if (!cardElement || !modal || !modalBody) return;
 
-        const title = cardElement.querySelector('h3').innerText.trim();
+        const title = cardElement.querySelector('h3').textContent.trim();
+        const thumb = cardElement.querySelector('.thumbnail-container img');
 
-        modalTitle.innerText = title;
-        modalThumbnail.src = cardElement.querySelector('.thumbnail-container img').src;
+        modalTitle.textContent = title;
+        modalThumbnail.src = thumb.src;
+        modalThumbnail.alt = title + ' 커버 이미지';
         modalCategories.innerHTML = cardElement.querySelector('.project-categories').innerHTML;
         modalBody.innerHTML = marked.parse(cardElement.querySelector('.project-content-raw').innerHTML);
 
+        // 모달 본문은 열릴 때 처음 DOM에 들어오므로 지연 로딩을 걸어도 안전하다.
+        modalBody.querySelectorAll('img').forEach(img => {
+            if (!img.hasAttribute('loading')) img.setAttribute('loading', 'lazy');
+            if (!img.hasAttribute('alt')) img.setAttribute('alt', '');
+        });
+        modalBody.querySelectorAll('iframe').forEach(f => {
+            if (!f.hasAttribute('loading')) f.setAttribute('loading', 'lazy');
+        });
+
         modal.style.display = "block";
         document.body.style.overflow = "hidden";
-        Prism.highlightAll();
+        modal.scrollTop = 0;
+
+        if (window.Prism) Prism.highlightAllUnder(modalBody);
+
+        lastFocusedCard = cardElement;
+        document.querySelector('.close-modal').focus();
 
         const newUrl = new URL(window.location);
         newUrl.searchParams.set('project', title);
 
         if (isInitialLoad) {
-            window.history.replaceState({
-                isModal: true
-            }, '', newUrl);
+            window.history.replaceState({ isModal: true }, '', newUrl);
         } else {
-            window.history.pushState({
-                isModal: true
-            }, '', newUrl);
+            window.history.pushState({ isModal: true }, '', newUrl);
         }
     }
 
     function closeModal(isPopState = false) {
         const modal = document.getElementById("portfolioModal");
-        if (!modal || modal.style.display === "none") return;
+        if (!modal || modal.style.display !== "block") return;
 
         modal.style.display = "none";
         document.body.style.overflow = "auto";
+
+        // 모달을 열었던 카드로 포커스를 되돌려 키보드 흐름이 끊기지 않게 한다.
+        if (lastFocusedCard) {
+            lastFocusedCard.focus();
+            lastFocusedCard = null;
+        }
 
         if (isPopState !== true) {
             const newUrl = new URL(window.location);
@@ -54,25 +69,7 @@
         }
     }
 
-
-    function toggleReview(event, reviewId) {
-        const boxes = document.querySelectorAll('.review-display-box');
-        boxes.forEach(box => box.style.display = 'none');
-
-        const buttons = document.querySelectorAll('.review-item-btn');
-        buttons.forEach(btn => btn.classList.remove('active'));
-
-        const target = document.getElementById('review-' + reviewId);
-        if (target) {
-            target.style.display = 'block';
-
-            const btn = event.target.closest('.review-item-btn');
-            if (btn) btn.classList.add('active');
-
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'nearest'
-            });
-        }
-    }
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeModal();
+    });
 </script>

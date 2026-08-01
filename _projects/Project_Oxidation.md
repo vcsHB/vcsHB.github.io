@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: project
 title: "OXIDATION"
 description: "2D 공장 시뮬레이션 디펜스 게임입니다."
 thumbnail: "/assets/Thumbnails/Oxidation_Title.png"
@@ -17,9 +17,6 @@ color : "#ff7b0094"
 ## 📕 개요
 <div style="display: flex; width: 100%; gap: 10px; justify-content: space-between;">
 <div style="flex: 1; width: 50%;">
-<style>
-.equal-table table { width: 100% !important; table-layout: fixed !important; }
-</style>
 <div class="equal-table">
 
 | 제목 | OXIDATION |
@@ -99,7 +96,7 @@ Astar 알고리즘을 활용하여 적들이 몰려오는 경로를 탐색하고
 
 <h3>↗️ Heuristic에 관하여</h3>
 
-<img src="../assets/ReferenceData/ProjectOxidation/Image_Oxidation_1.png" height="100" style="border-radius:8px;">
+<img src="/assets/ReferenceData/ProjectOxidation/Image_Oxidation_1.png" height="100" style="border-radius:8px;">
 
 <p>
 GetHeuristic함수를 통해 경로 탐색의 최종목표 지점으로의 대략적인 방향을 제시하고 그 방향의 경로를 먼저 탐색 하도록 합니다.
@@ -108,7 +105,7 @@ GetHeuristic함수를 통해 경로 탐색의 최종목표 지점으로의 대�
 
 <h3>🗺️ ReconstructPath에 관하여</h3>
 
-<img src="../assets/ReferenceData/ProjectOxidation/Image_Oxidation_2.png" height="250" style="border-radius:8px;">
+<img src="/assets/ReferenceData/ProjectOxidation/Image_Oxidation_2.png" height="250" style="border-radius:8px;">
 
 <p>
 경로 탐색에 성공하였을때.
@@ -118,14 +115,14 @@ ReconstructPath()를 해주는 이유는 이후 WaveSystem으로 생성된 에�
 
 <h3>+ 🚨 개발 중 사소한 사건사고</h3>
 
-<img src="../assets/ReferenceData/ProjectOxidation/Image_Oxidation_3.png" height="550" style="border-radius:8px;">
+<img src="/assets/ReferenceData/ProjectOxidation/Image_Oxidation_3.png" height="550" style="border-radius:8px;">
 
 <p>
 이 길찾기 알고리즘을 개발할 적에 목표위치와 벽이 애매하게 가까웠어서 벽인줄 알고 목표지점이 배제되어,
 길찾기를 시도하다 스택오버플로우로 게임이 에디터 채로 폭발하는 문제가 발생했었습니다.
 </p>
 
-<img src="../assets/ReferenceData/ProjectOxidation/Image_Oxidation_4.png" height="150" style="border-radius:8px;">
+<img src="/assets/ReferenceData/ProjectOxidation/Image_Oxidation_4.png" height="150" style="border-radius:8px;">
 
 <p>
 혹시나 이런일이 또 발생하지 않게 하고자 만든 예외처리입니다.

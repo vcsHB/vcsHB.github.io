@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: project
 title: "***PROJECTNAME"
 description: "***PROJECT_DESCRIPTION"
 thumbnail: "/assets/Thumbnails/Default_Thumbnail.png"
@@ -11,9 +11,6 @@ color : "#000000"
 ## 📕 개요
 <div style="display: flex; width: 100%; gap: 10px; justify-content: space-between;">
 <div style="flex: 1; width: 50%;">
-<style>
-.equal-table table { width: 100% !important; table-layout: fixed !important; }
-</style>
 <div class="equal-table">
 
 | 제목 | ***PROJECTNAME |

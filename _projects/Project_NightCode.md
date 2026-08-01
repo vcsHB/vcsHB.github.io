@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: project
 title: "NightCode"
 description: "2D 로프액션 로그라이크 게임입니다."
 thumbnail: "/assets/Thumbnails/GIGDC_Ducking_Title_Image.png"
@@ -17,9 +17,6 @@ color : "#c626b3ff"
 ## 📕 개요
 <div style="display: flex; width: 100%; gap: 10px; justify-content: space-between;">
 <div style="flex: 1; width: 50%;">
-<style>
-.equal-table table { width: 100% !important; table-layout: fixed !important; }
-</style>
 <div class="equal-table">
 
 | 제목 | NightCode |
@@ -88,7 +85,7 @@ Player들을 Manager내에서 관리해줍니다. 하지만 기능이 많이 확
 <p>
 유니티 2D 자체에 들어있는 Distance Joint 2D를 활용하여 로프와 같은 움직임을 구현하였습니다.
 </p>
-<img src="../assets/ReferenceData/ProjectNightCode/Image_NightCode_1.png" height="300" style="border-radius:8px;">
+<img src="/assets/ReferenceData/ProjectNightCode/Image_NightCode_1.png" height="300" style="border-radius:8px;">
 
 <p>
 Joint의 몇가지 옵션들을 설정하여 가장 로프같으면서도 조작감을 해치지 않도록 설정했습니다.
@@ -96,7 +93,7 @@ Joint의 몇가지 옵션들을 설정하여 가장 로프같으면서도 조작
 
 🔗[개발일지 - 로프액션](https://dev-vcs.tistory.com/entry/%EC%A1%B8%EC%97%85%EC%9E%91%ED%92%88-%EA%B0%9C%EB%B0%9C-%EA%B8%B0%EB%A1%9D-%EB%A1%9C%ED%94%84-%EC%8A%A4%EC%9C%99%EA%B3%BC-%EB%B2%A1%ED%84%B0-%EB%82%B4%EC%A0%81)
 </p>
-<img src="../assets/ReferenceData/ProjectNightCode/GIF_NightCode_1.gif" height="300" style="border-radius:8px;">
+<img src="/assets/ReferenceData/ProjectNightCode/GIF_NightCode_1.gif" height="300" style="border-radius:8px;">
 </div>
 </div>
 
@@ -112,7 +109,7 @@ Joint의 몇가지 옵션들을 설정하여 가장 로프같으면서도 조작
 
 적들이 가지는 복잡한 행동 방식과 순서를 조건에 따라 분기하고 우선순위를 더욱 가시적이고 유연하게 확장하기 쉽도록 제작할 수 있는 Behavior Tree를 사용하여 적의 AI를 개발했습니다.
 </p>
-<img src="../assets/ReferenceData/ProjectNightCode/Image_NightCode_2.png" height="140" style="border-radius:8px;">
+<img src="/assets/ReferenceData/ProjectNightCode/Image_NightCode_2.png" height="140" style="border-radius:8px;">
 <p>
 이때, BT는 Unity 6 최신 버전에서 공식적으로 지원하는 Behavior Graph를 활용하였습니다.
 
@@ -122,19 +119,19 @@ Joint의 몇가지 옵션들을 설정하여 가장 로프같으면서도 조작
 
 따라서 이에 대한 첫 번째 문제에 부딫힙니다. 이에 대한 해결을 위해 FSM과 BT를 섞어 사용해야했습니다.
 </p>
-<img src="../assets/ReferenceData/ProjectNightCode/Image_NightCode_3.png" height="250" style="border-radius:8px;">
+<img src="/assets/ReferenceData/ProjectNightCode/Image_NightCode_3.png" height="250" style="border-radius:8px;">
 <p>
 이를 위해 이벤트 채널을 활용하였습니다. EventChannelBase를 상속받아 구현된 StateChange클래스를 만들고 이벤트가 발행되었을때 하위 트리 전체를 몽땅 재시작하게끔 구성하면, FSM과 같이 언제든지 원할 때에 스테이트를 탈출 가능한 BT가 완성됩니다.
 </p>
-<img src="../assets/ReferenceData/ProjectNightCode/Image_NightCode_4.png" height="300" style="border-radius:8px;">
+<img src="/assets/ReferenceData/ProjectNightCode/Image_NightCode_4.png" height="300" style="border-radius:8px;">
 
 <h2> 💻 1챕터 보스 개발에 BT 활용 </h2>
 <p>
 1챕터 보스 “BurnOut”은 총 5가지의 행동을 취하고 각각의 행동이 조건에 따라 복잡하게 흘러가므로 이러한 개발에 적절한 Behaviour Tree를 활용하였습니다.
 </p>
 
-<img src="../assets/ReferenceData/ProjectNightCode/GIF_NightCode_2.gif" height="350" style="border-radius:8px;">
-<img src="../assets/ReferenceData/ProjectNightCode/Image_NightCode_5.png" height="200" style="border-radius:8px;">
+<img src="/assets/ReferenceData/ProjectNightCode/GIF_NightCode_2.gif" height="350" style="border-radius:8px;">
+<img src="/assets/ReferenceData/ProjectNightCode/Image_NightCode_5.png" height="200" style="border-radius:8px;">
 
 <p>
 각각의 패턴을 구사하기 위해 미리 필요한 요소들을 객체화시키고 기능을 분할시켜 블랙보드에 등록시켰습니다. 예로는 레이저 발사를 담당하는 객체. 보스의 움직임을 담당하는 객체. 애니메이션과 추가적인 비주얼을 관리하는 렌더러가 있습니다.

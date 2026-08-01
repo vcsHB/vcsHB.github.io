@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: project
 title: "BOUNDERS"
 description: "AI 강화학습 기반 PVE와 로컬 멀티 대전을 지원하는 핑퐁라이크 게임입니다."
 thumbnail: "/assets/Thumbnails/Project_BOUNDERS_Thumbnail.png"
@@ -11,9 +11,6 @@ color : "#00ffc8"
 ## 📕 개요
 <div style="display: flex; width: 100%; gap: 10px; justify-content: space-between;">
 <div style="flex: 1; width: 50%;">
-<style>
-.equal-table table { width: 100% !important; table-layout: fixed !important; }
-</style>
 <div class="equal-table">
 
 | 제목 | BOUNDERS |

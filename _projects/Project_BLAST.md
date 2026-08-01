@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: project
 title: "BLAST"
 description: "3D 메카 뱀서라이크 게임입니다."
 thumbnail: "/assets/Thumbnails/Title_BLAST.png"
@@ -17,9 +17,6 @@ color : "#4287f5"
 ## 📕 개요
 <div style="display: flex; width: 100%; gap: 10px; justify-content: space-between;">
 <div style="flex: 1; width: 50%;">
-<style>
-.equal-table table { width: 100% !important; table-layout: fixed !important; }
-</style>
 <div class="equal-table">
 
 | 제목 | BLAST |

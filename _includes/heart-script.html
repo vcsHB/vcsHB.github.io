@@ -1,66 +1,77 @@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js">
-</script>
-
 <script>
-    const SECRET_SALT = "vcs_portfolio_2025";
+    // 주의: 아래 salt/해시는 보안 장치가 아니라 "같은 브라우저에서 중복 클릭 방지" 용도다.
+    // 클라이언트 코드이므로 우회가 가능하며, 카운트는 정확한 수치가 아닌 참고값으로 다룬다.
+    const HEART_KEY_SALT = "vcs_portfolio_2025";
     const GAS_URL =
         'https://script.google.com/macros/s/AKfycbzIex3Sdy37cyePa8FWlxWNQVVgC2dRvgD6up8qADnbh-VB5r4WK60xZWxTmuQCPZ0B/exec';
 
-    function generateHash(id) {
-        return btoa(encodeURIComponent(id + "_" + SECRET_SALT));
+    function heartToken(id) {
+        return btoa(encodeURIComponent(id + "_" + HEART_KEY_SALT));
+    }
+
+    function markHearted(btn) {
+        btn.disabled = true;
+        btn.style.opacity = "0.5";
     }
 
     window.handleHeartClick = function (btn, id) {
         const countSpan = btn.querySelector('.heart-count');
         const storageKey = 'heart-' + id;
-        const currentHash = localStorage.getItem(storageKey);
 
-        if (!countSpan || currentHash === generateHash(id)) return;
+        if (!countSpan || localStorage.getItem(storageKey) === heartToken(id)) return;
 
-        let currentCount = parseInt(countSpan.innerText) || 0;
-        countSpan.innerText = currentCount + 1;
+        const previousCount = parseInt(countSpan.textContent, 10) || 0;
 
+        // 낙관적 업데이트 — 실패하면 아래 catch에서 되돌린다.
+        countSpan.textContent = previousCount + 1;
         btn.style.transform = "scale(1.3)";
-        localStorage.setItem(storageKey, generateHash(id));
+        localStorage.setItem(storageKey, heartToken(id));
 
         setTimeout(() => {
             btn.style.transform = "scale(1)";
-            btn.disabled = true;
-            btn.style.opacity = "0.5";
+            markHearted(btn);
         }, 200);
 
-        fetch(`${GAS_URL}?action=add&id=${id}`, {
-                method: 'GET',
-                redirect: 'follow'
+        fetch(`${GAS_URL}?action=add&id=${encodeURIComponent(id)}`, { redirect: 'follow' })
+            .then(res => {
+                if (!res.ok) throw new Error(res.status);
+                return res.text();
             })
-            .then(res => res.text())
             .then(newCount => {
-                if (newCount) countSpan.innerText = newCount;
+                const parsed = parseInt(newCount, 10);
+                if (!isNaN(parsed)) countSpan.textContent = parsed;
+            })
+            .catch(() => {
+                // 서버에 반영되지 않았으므로 화면과 중복 방지 플래그를 모두 되돌린다.
+                countSpan.textContent = previousCount;
+                localStorage.removeItem(storageKey);
+                btn.disabled = false;
+                btn.style.opacity = "1";
             });
     };
 
     document.addEventListener("DOMContentLoaded", function () {
-        document.querySelectorAll('.heart-count').forEach(targetSpan => {
-            const projectId = targetSpan.id.replace('count-', '');
-            const btn = targetSpan.closest('button');
+        document.querySelectorAll('.heart-count').forEach(span => {
+            const projectId = span.id.replace('count-', '');
+            const btn = span.closest('button');
 
-            if (localStorage.getItem('heart-' + projectId) === generateHash(projectId)) {
-                btn.disabled = true;
-                btn.style.opacity = "0.5";
+            if (localStorage.getItem('heart-' + projectId) === heartToken(projectId)) {
+                markHearted(btn);
             }
 
-            targetSpan.innerHTML = '<span class="loading-spinner"></span>';
+            span.innerHTML = '<span class="loading-spinner" aria-hidden="true"></span>';
 
-            fetch(`${GAS_URL}?action=get&id=${projectId}`, {
-                    method: 'GET',
-                    redirect: 'follow'
+            fetch(`${GAS_URL}?action=get&id=${encodeURIComponent(projectId)}`, { redirect: 'follow' })
+                .then(res => {
+                    if (!res.ok) throw new Error(res.status);
+                    return res.text();
                 })
-                .then(res => res.text())
                 .then(count => {
-                    targetSpan.innerText = count || 0;
+                    const parsed = parseInt(count, 10);
+                    span.textContent = isNaN(parsed) ? 0 : parsed;
                 })
                 .catch(() => {
-                    targetSpan.innerText = 0;
+                    span.textContent = 0;
                 });
         });
     });

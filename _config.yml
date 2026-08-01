@@ -1,6 +1,26 @@
-show_downloads: false
-google_analytics:
+title: "vcs Portfolio"
+description: "게임 클라이언트 개발자 vcs(vcsHB)의 포트폴리오. Unity / C# 기반 게임 프로젝트와 개발 툴을 소개합니다."
+author: "vcs"
+lang: ko
+
+url: "https://vcsHB.github.io"
+baseurl: ""
+
+# 링크 미리보기(OG) 기본 이미지 — 프로젝트 페이지는 각자의 thumbnail을 사용한다.
+og_image: "/assets/Thumbnails/Default_Thumbnail.png"
+
 collections:
   projects:
-    output: true 
+    output: true
+
 tech_skills_path: "_data/tech_skills.yml"
+
+plugins:
+  - jekyll-sitemap
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - README.md
+  - _templates

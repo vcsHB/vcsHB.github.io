@@ -1,20 +1,17 @@
-<div class="tab-container">
-    <button class="tab-link active" onclick="openTab(event, 'Profile')">Profile</button>
-    <button class="tab-link" onclick="openTab(event, 'History')">History</button>
-    <button class="tab-link" onclick="openTab(event, 'Portfolio')">Portfolio</button>
+<div class="tab-container" role="tablist">
+    <button class="tab-link active" role="tab" aria-controls="Profile" aria-selected="true"
+        onclick="openTab(event, 'Profile')">Profile</button>
+    <button class="tab-link" role="tab" aria-controls="History" aria-selected="false"
+        onclick="openTab(event, 'History')">History</button>
+    <button class="tab-link" role="tab" aria-controls="Portfolio" aria-selected="false"
+        onclick="openTab(event, 'Portfolio')">Portfolio</button>
 </div>
 
-<div class="progress-container">
-    <div class="progress-bar" id="myBar"></div>
-</div>
-
-<button class="theme-switch" onclick="toggleTheme()" id="themeBtn" title="테마 변경">🌓</button>
-
-<div id="Profile" class="tab-content active">
+<div id="Profile" class="tab-content active" role="tabpanel">
     <div class="profile-container">
 
         <div class="github-profile-card">
-            <img src="https://github.com/vcsHB.png" class="profile-avatar">
+            <img src="https://github.com/vcsHB.png" class="profile-avatar" alt="vcs 프로필 사진" width="100" height="100">
             <h2 style="margin: 0;">vcs</h2>
             <p style="color: #666; margin: 5px 0;">Developer</p>
 
@@ -39,7 +36,7 @@
 
             <div class="github-contributions" style="margin-top: 20px; text-align: left;">
                 <h3 style="font-size: 14px; margin-bottom: 8px; color: #333;">Contributions</h3>
-                <img src="https://ghchart.rshah.org/0366d6/vcsHB" alt="vcsHB's Github Chart"
+                <img src="https://ghchart.rshah.org/0366d6/vcsHB" alt="vcsHB의 GitHub 잔디 차트" loading="lazy"
                     style="width: 100%; border-radius: 8px; border: 1px solid #eee; padding: 8px; background: white;" />
             </div>
         </div>
@@ -63,7 +60,7 @@
                     </svg>
 
                     <div class="gauge-inner-content">
-                        <img src="{{ skill.icon }}" class="gauge-logo">
+                        <img src="{{ skill.icon }}" class="gauge-logo" alt="" loading="lazy">
                         <div class="gauge-overlay"></div>
                         <div class="gauge-text-box">
                             <small>Level</small>
@@ -78,23 +75,11 @@
                 </div>
                 {% endfor %}
             </div>
-            {% comment %}
-            <div class="tech-slider" id="techSlider">
-                <div class="tech-track">
-                    {% for skill in site.data.tech_skills %}
-                    <div class="tech-item">
-                        <img src="{{ skill.icon }}" alt="{{ skill.name }}">
-                        <span style="font-size: 11px; color: #888;">{{ skill.name }}</span>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-            {% endcomment %}
         </div>
     </div>
 </div>
 
-<div id="History" class="tab-content">
+<div id="History" class="tab-content" role="tabpanel">
     <div class="history-list">
         {% for item in site.data.history %}
         <div class="history-item">
@@ -108,23 +93,27 @@
     </div>
 </div>
 
-<div id="Portfolio" class="tab-content">
+<div id="Portfolio" class="tab-content" role="tabpanel">
     <div style="margin-bottom: 30px;">
-        <input type="text" id="searchInput" placeholder="Search projects..."
-            style="width: 100%; padding: 12px; border-radius: 12px; border: 1px solid #eee;">
+        <label for="searchInput" class="visually-hidden">프로젝트 검색</label>
+        <input type="search" id="searchInput" placeholder="프로젝트 · 카테고리 · 설명 검색..." autocomplete="off">
     </div>
+    <p id="searchEmpty" class="search-empty" hidden>검색 결과가 없습니다.</p>
     <div id="projectList">
         {% assign sorted_projects = site.projects | sort: "order" %}
 
         {% for item in sorted_projects %}
-        <div class="project-card" onclick="openModal(this)"
+        <div class="project-card" onclick="openModal(this)" tabindex="0" role="button"
+            aria-label="{{ item.title }} 상세 보기"
             data-title="{{ item.title | downcase | replace: ' ', '' }}"
             data-category="{% for cat_id in item.categories %}{% assign cat_data = site.data.categories | where: 'id', cat_id | first %}{{ cat_data.name | downcase | replace: ' ', '' }}{% endfor %}"
+            data-description="{{ item.description | replace: '<br>', ' ' | strip_html | downcase | escape }}"
             style="--hover-color: {{ item.color | default: 'var(--accent-color)' }};">
             <script class="project-content-raw" type="text/template">{{ item.content }}</script>
 
             <div class="thumbnail-container">
-                <img src="{{ item.thumbnail }}">
+                <img src="{{ item.thumbnail | relative_url }}" alt="{{ item.title }} 썸네일" loading="lazy"
+                    width="300" height="200">
             </div>
 
             <div class="content-container">
@@ -144,7 +133,8 @@
             </div>
 
             <div class="heart-container">
-                <button onclick="event.stopPropagation(); handleHeartClick(this, '{{ item.title | slugify }}')">
+                <button type="button" aria-label="{{ item.title }} 좋아요"
+                    onclick="event.stopPropagation(); handleHeartClick(this, '{{ item.title | slugify }}')">
                     ❤️ <span class="heart-count" id="count-{{ item.title | slugify }}">0</span>
                 </button>
             </div>
@@ -153,16 +143,17 @@
     </div>
 </div>
 
-<div id="portfolioModal" class="modal" onclick="if(event.target==this) closeModal()">
+<div id="portfolioModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"
+    onclick="if(event.target==this) closeModal()">
     <div class="modal-content">
-        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <button type="button" class="close-modal" onclick="closeModal()" aria-label="닫기">&times;</button>
 
-        <img id="modalThumbnail" class="modal-header-image" src="" alt="Cover">
+        <img id="modalThumbnail" class="modal-header-image" src="" alt="">
 
         <div class="modal-info-section">
             <h1 id="modalTitle"></h1>
             <div id="modalCategories"></div>
-            <hr style="border: 0; border-top: 1px solid #eee; margin-bottom: 30px;">
+            <hr style="border: 0; border-top: 1px solid var(--card-border); margin-bottom: 30px;">
         </div>
 
         <div id="modalBody" class="markdown-body"></div>
@@ -170,105 +161,65 @@
 </div>
 
 <script>
-    window.onload = function () {
-        setTimeout(function () {
-            window.scrollTo(0, 0);
-        }, 10);
-    };
+    // 카드 제목을 URL 파라미터와 비교할 때 쓰는 정규화 규칙(공백 무시, 대소문자 무시).
+    function normalizeTitle(text) {
+        return (text || '').trim().toLowerCase().replace(/\s+/g, '');
+    }
 
-    window.addEventListener('DOMContentLoaded', () => {
-        const urlParams = new URLSearchParams(window.location.search);
-        const targetTab = urlParams.get('tab');
-        const targetProject = urlParams.get('project');
+    function findCardByTitle(title) {
+        const wanted = normalizeTitle(title);
+        return Array.from(document.querySelectorAll('.project-card')).find(function (card) {
+            return normalizeTitle(card.querySelector('h3').textContent) === wanted;
+        });
+    }
 
-        if (targetTab && document.getElementById(targetTab)) {
-            const tabBtn = document.querySelector(`button[onclick*="'${targetTab}'"]`);
-            if (tabBtn) tabBtn.click();
-        } else if (targetProject) {
-            const portfolioBtn = document.querySelector(`button[onclick*="'Portfolio'"]`);
-            if (portfolioBtn) portfolioBtn.click();
+    document.addEventListener('DOMContentLoaded', function () {
+        const params = new URLSearchParams(window.location.search);
+        const targetTab = params.get('tab');
+        const targetProject = params.get('project');
+
+        // 초기 탭 활성화는 click()이 아니라 직접 전환한다.
+        // click()은 openTab의 pushState까지 실행시켜 히스토리에 가짜 항목을 남기고,
+        // 그 결과 첫 번째 뒤로가기가 아무 반응 없는 것처럼 보이게 만든다.
+        if (targetProject) {
+            activateTab('Portfolio');
+        } else if (targetTab && document.getElementById(targetTab)) {
+            activateTab(targetTab);
         }
 
+        // 딥링크로 들어온 경우 모달을 연다.
+        // 카드는 이미 DOM에 있으므로 임의의 setTimeout 대기가 필요 없다.
         if (targetProject) {
-            setTimeout(() => {
-                const projectCards = document.querySelectorAll('.project-card');
-                projectCards.forEach(card => {
-                    const cardTitle = card.querySelector('h3').innerText.trim().toLowerCase();
-                    const searchTitle = targetProject.toLowerCase().replace(/ /g, '');
-                    if (cardTitle.replace(/ /g, '') === searchTitle) {
-                        openModal(card);
-                    }
-                });
-            }, 300);
+            const card = findCardByTitle(targetProject);
+            if (card) openModal(card, true);
         }
     });
 
-    window.addEventListener('popstate', (event) => {
-        const urlParams = new URLSearchParams(window.location.search);
-        const projectTitle = urlParams.get('project');
-        const tabName = urlParams.get('tab');
-        const modal = document.getElementById("portfolioModal");
+    window.addEventListener('popstate', function () {
+        const params = new URLSearchParams(window.location.search);
+        const projectTitle = params.get('project');
+        const tabName = params.get('tab');
 
-        // ...... hm
-        if (tabName) {
-            const tabcontent = document.getElementsByClassName("tab-content");
-            for (let i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-                tabcontent[i].classList.remove("active");
-            }
-            const tablinks = document.getElementsByClassName("tab-link");
-            for (let i = 0; i < tablinks.length; i++) {
-                tablinks[i].classList.remove("active");
-            }
-
-            const targetTab = document.getElementById(tabName);
-            if (targetTab) {
-                targetTab.style.display = "block";
-                targetTab.classList.add("active");
-                const tabBtn = document.querySelector(`button[onclick*="'${tabName}'"]`);
-                if (tabBtn) tabBtn.classList.add("active");
-            }
+        if (tabName && document.getElementById(tabName)) {
+            activateTab(tabName);
         }
 
         if (!projectTitle) {
             closeModal(true);
         } else {
-            const projectCards = document.querySelectorAll('.project-card');
-            projectCards.forEach(card => {
-                if (card.querySelector('h3').innerText.trim() === projectTitle) {
-                    if (modal.style.display !== "block") openModal(card, true);
-                }
-            });
+            const card = findCardByTitle(projectTitle);
+            const modal = document.getElementById('portfolioModal');
+            if (card && modal.style.display !== 'block') openModal(card, true);
         }
     });
 
-    function openModalWithUrl(cardElement) {
-        openModal(cardElement); // For Modal.....
-        const title = cardElement.querySelector('h3').innerText;
-    }
-
-    function updateSkillColors(theme) {
-        const elements = document.querySelectorAll('.skill-gauge-bar, .skill-gauge-label');
-        elements.forEach(el => {
-            const color = theme === 'dark' ? el.getAttribute('data-dark') : el.getAttribute('data-light');
-            if (el.classList.contains('skill-gauge-bar')) {
-                el.setAttribute('stroke', color);
-            } else {
-                el.style.color = color;
-            }
-        });
-    }
-
-    function toggleTheme() {
-        const currentTheme = document.documentElement.getAttribute("data-theme");
-        const targetTheme = currentTheme === "dark" ? "light" : "dark";
-
-        document.documentElement.setAttribute("data-theme", targetTheme);
-        localStorage.setItem("theme", targetTheme);
-        updateSkillColors(targetTheme);
-    }
-
-    const savedTheme = localStorage.getItem("theme") || "light";
-    document.documentElement.setAttribute("data-theme", savedTheme);
-    updateSkillColors(savedTheme);
+    // 카드가 role="button"이므로 Enter/Space로도 열 수 있어야 한다.
+    // 단, 카드 안의 하트 버튼에 포커스가 있을 때는 그쪽 동작을 가로채면 안 되므로
+    // 이벤트 대상이 카드 자신인 경우로 한정한다.
+    document.addEventListener('keydown', function (e) {
+        if (e.key !== 'Enter' && e.key !== ' ') return;
+        if (!e.target.classList || !e.target.classList.contains('project-card')) return;
+        e.preventDefault();
+        openModal(e.target);
+    });
 </script>

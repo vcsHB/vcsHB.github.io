@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: project
 title: "EDGE"
 description: "2D 모서리를 타고 이동하는 디펜스 게임입니다."
 thumbnail: "/assets/Thumbnails/Edge_Title.png"
@@ -17,9 +17,6 @@ color : "#8965ff"
 ## 📕 개요
 <div style="display: flex; width: 100%; gap: 10px; justify-content: space-between;">
 <div style="flex: 1; width: 50%;">
-<style>
-.equal-table table { width: 100% !important; table-layout: fixed !important; }
-</style>
 <div class="equal-table">
 
 | 제목 | EDGE |

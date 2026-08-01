@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: project
 title: "AVOID"
 description: "3D 실시간 턴제 퍼즐 게임입니다."
 thumbnail: "/assets/Thumbnails/AVOID_SubTitle.png"
@@ -17,9 +17,6 @@ color : "#5c5c5c"
 ## 📕 개요
 <div style="display: flex; width: 100%; gap: 10px; justify-content: space-between;">
 <div style="flex: 1; width: 50%;">
-<style>
-.equal-table table { width: 100% !important; table-layout: fixed !important; }
-</style>
 <div class="equal-table">
 
 | 제목 | AVOID |

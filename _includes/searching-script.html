@@ -1,32 +1,32 @@
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const searchInput = document.getElementById('searchInput');
-        const cards = document.querySelectorAll('.project-card');
+        if (!searchInput) return;
 
-        if (searchInput) {
+        const cards = Array.from(document.querySelectorAll('.project-card'));
+        const emptyMsg = document.getElementById('searchEmpty');
+
+        searchInput.addEventListener('input', e => {
+            const term = e.target.value.toLowerCase().trim();
+            let visible = 0;
+
             cards.forEach(card => {
-                if (!card.dataset.display) {
-                    card.dataset.display = getComputedStyle(card).display;
-                }
+                const haystack = [
+                    card.dataset.title,
+                    card.dataset.category,
+                    card.dataset.description
+                ].join(' ').toLowerCase();
+
+                const isMatch = !term || haystack.includes(term);
+
+                // 인라인 display 대신 클래스를 토글한다.
+                // 인라인 값을 쓰면 카드가 지그재그 배치(nth-child)에서 쓰는
+                // flex-direction 규칙과 충돌한다.
+                card.classList.toggle('is-hidden', !isMatch);
+                if (isMatch) visible++;
             });
 
-            searchInput.addEventListener('input', e => {
-                const term = e.target.value.toLowerCase().trim();
-
-                cards.forEach(card => {
-                    const title = (card.dataset.title || '').toLowerCase();
-                    const category = (card.dataset.category || '').toLowerCase();
-
-                    const isMatch =
-                        title.includes(term) ||
-                        category.includes(term);
-
-                    card.style.display = isMatch ?
-                        card.dataset.display :
-                        'none';
-                });
-            });
-
-        }
+            if (emptyMsg) emptyMsg.hidden = visible !== 0;
+        });
     });
 </script>

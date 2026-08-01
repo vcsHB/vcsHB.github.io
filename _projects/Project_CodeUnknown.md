@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: project
 title: "Code:Unknown"
 description: "2D 해킹 로그라이트 게임입니다."
 thumbnail: "/assets/Thumbnails/CodeUnkncown_Title.png"
@@ -17,9 +17,6 @@ color : "#dc3c18"
 ## 📕 개요
 <div style="display: flex; width: 100%; gap: 10px; justify-content: space-between;">
 <div style="flex: 1; width: 50%;">
-<style>
-.equal-table table { width: 100% !important; table-layout: fixed !important; }
-</style>
 <div class="equal-table">
 
 | 제목 | Code:Unknown |

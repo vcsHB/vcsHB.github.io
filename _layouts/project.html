@@ -1,0 +1,32 @@
+---
+layout: default
+---
+
+<article class="project-page markdown-body">
+    <p class="project-back">
+        <a href="{{ '/' | relative_url }}?tab=Portfolio">&larr; 포트폴리오 목록으로</a>
+    </p>
+
+    {% if page.thumbnail %}
+    <img class="project-page-cover" src="{{ page.thumbnail | relative_url }}" alt="{{ page.title }} 커버 이미지">
+    {% endif %}
+
+    <h1 class="project-page-title">{{ page.title }}</h1>
+
+    <div class="project-categories">
+        {% for category_id in page.categories %}
+        {% assign category = site.data.categories | where: "id", category_id | first %}
+        {% if category %}
+        <span class="category-badge" style="background: {{ category.color }};">{{ category.name }}</span>
+        {% endif %}
+        {% endfor %}
+    </div>
+
+    <p class="project-page-desc">{{ page.description }}</p>
+
+    <hr>
+
+    {{ content }}
+</article>
+
+{% include footer.html %}

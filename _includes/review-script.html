@@ -1,0 +1,27 @@
+<script>
+    // 프로젝트 본문의 "주요 기능" 아코디언.
+    // 모달(index)과 개별 프로젝트 페이지 양쪽에서 쓰이므로 레이아웃에서 항상 로드한다.
+    function toggleReview(event, reviewId) {
+        var target = document.getElementById('review-' + reviewId);
+        var btn = event.target.closest('.review-item-btn');
+        var isOpen = target && target.classList.contains('active');
+
+        document.querySelectorAll('.review-display-box').forEach(function (box) {
+            box.classList.remove('active');
+        });
+        document.querySelectorAll('.review-item-btn').forEach(function (b) {
+            b.classList.remove('active');
+            b.setAttribute('aria-expanded', 'false');
+        });
+
+        // 열려 있던 항목을 다시 누르면 닫는다.
+        if (!target || isOpen) return;
+
+        target.classList.add('active');
+        if (btn) {
+            btn.classList.add('active');
+            btn.setAttribute('aria-expanded', 'true');
+        }
+        target.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+</script>
