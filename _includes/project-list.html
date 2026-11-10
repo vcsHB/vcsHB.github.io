@@ -5,6 +5,8 @@
         onclick="openTab(event, 'History')">History</button>
     <button class="tab-link" role="tab" aria-controls="Portfolio" aria-selected="false"
         onclick="openTab(event, 'Portfolio')">Portfolio</button>
+    <button class="tab-link" role="tab" aria-controls="Arcade" aria-selected="false"
+        onclick="openTab(event, 'Arcade')">Arcade</button>
 </div>
 
 <div id="Profile" class="tab-content active" role="tabpanel">
@@ -13,7 +15,7 @@
         <div class="github-profile-card">
             <img src="https://github.com/vcsHB.png" class="profile-avatar" alt="vcs 프로필 사진" width="100" height="100">
             <h2 style="margin: 0;">vcs</h2>
-            <p style="color: #666; margin: 5px 0;">Developer</p>
+            <p style="color: var(--sub-text); margin: 5px 0;">Developer</p>
 
             <div class="category-badges"
                 style="margin-bottom: 15px; display: flex; flex-wrap: wrap; justify-content: center; gap: 5px;">
@@ -35,9 +37,9 @@
             </div>
 
             <div class="github-contributions" style="margin-top: 20px; text-align: left;">
-                <h3 style="font-size: 14px; margin-bottom: 8px; color: #333;">Contributions</h3>
+                <h3 style="font-size: 14px; margin-bottom: 8px; color: var(--text-color);">Contributions</h3>
                 <img src="https://ghchart.rshah.org/0366d6/vcsHB" alt="vcsHB의 GitHub 잔디 차트" loading="lazy"
-                    style="width: 100%; border-radius: 8px; border: 1px solid #eee; padding: 8px; background: white;" />
+                    style="width: 100%; border-radius: 8px; border: 1px solid var(--card-border); padding: 8px; background: white; box-sizing: border-box;" />
             </div>
         </div>
         <div class="github-profile-readme">
@@ -142,6 +144,8 @@
         {% endfor %}
     </div>
 </div>
+
+{% include arcade.html %}
 
 <div id="portfolioModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"
     onclick="if(event.target==this) closeModal()">

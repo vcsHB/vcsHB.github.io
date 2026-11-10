@@ -1,0 +1,134 @@
+<div class="theme-picker" id="themePicker">
+    <button type="button" class="theme-switch" id="themeBtn" title="테마 변경" aria-label="테마 선택"
+        aria-haspopup="true" aria-expanded="false" aria-controls="themeMenu">🎨</button>
+
+    <ul class="theme-menu" id="themeMenu" role="menu" aria-label="테마" hidden>
+        <li role="none">
+            <button type="button" class="theme-option" role="menuitemradio" data-theme-value="light" aria-checked="false">
+                <span class="theme-swatch" aria-hidden="true"><i style="background:#ffffff"></i><i style="background:#333333"></i><i style="background:#0366d6"></i></span>
+                Light
+            </button>
+        </li>
+        <li role="none">
+            <button type="button" class="theme-option" role="menuitemradio" data-theme-value="dark" aria-checked="false">
+                <span class="theme-swatch" aria-hidden="true"><i style="background:#1a1a1a"></i><i style="background:#e0e0e0"></i><i style="background:#58a6ff"></i></span>
+                Dark
+            </button>
+        </li>
+        <li role="none">
+            <button type="button" class="theme-option" role="menuitemradio" data-theme-value="pixel" aria-checked="false">
+                <span class="theme-swatch" aria-hidden="true"><i style="background:#0e0b1f"></i><i style="background:#ff5c8a"></i><i style="background:#ffd23f"></i></span>
+                8-Bit
+            </button>
+        </li>
+        <li role="none">
+            <button type="button" class="theme-option" role="menuitemradio" data-theme-value="pocket" aria-checked="false">
+                <span class="theme-swatch" aria-hidden="true"><i style="background:#9bbc0f"></i><i style="background:#306230"></i><i style="background:#0f380f"></i></span>
+                Pocket
+            </button>
+        </li>
+    </ul>
+</div>
+
+<script>
+    (function () {
+        // head.html의 초기화 스크립트와 같은 목록을 유지해야 한다.
+        var THEMES = {
+            light: { icon: '☀️', tone: 'light', meta: '#0366d6' },
+            dark: { icon: '🌙', tone: 'dark', meta: '#1a1a1a' },
+            pixel: { icon: '👾', tone: 'dark', meta: '#0e0b1f' },
+            pocket: { icon: '🎮', tone: 'light', meta: '#9bbc0f' }
+        };
+
+        var picker = document.getElementById('themePicker');
+        var btn = document.getElementById('themeBtn');
+        var menu = document.getElementById('themeMenu');
+        var options = Array.prototype.slice.call(menu.querySelectorAll('.theme-option'));
+
+        // 스킬 게이지 색은 yml에서 라이트/다크 두 벌만 정의되어 있으므로 톤으로 고른다.
+        function updateSkillColors(tone) {
+            document.querySelectorAll('.skill-gauge-bar, .skill-gauge-label').forEach(function (el) {
+                var color = tone === 'dark' ? el.getAttribute('data-dark') : el.getAttribute('data-light');
+                if (!color) return;
+                if (el.classList.contains('skill-gauge-bar')) {
+                    el.setAttribute('stroke', color);
+                } else {
+                    el.style.color = color;
+                }
+            });
+        }
+
+        function current() {
+            var t = document.documentElement.getAttribute('data-theme');
+            return THEMES[t] ? t : 'light';
+        }
+
+        function syncUi(theme) {
+            btn.textContent = THEMES[theme].icon;
+            options.forEach(function (o) {
+                o.setAttribute('aria-checked', String(o.getAttribute('data-theme-value') === theme));
+            });
+            var meta = document.querySelector('meta[name="theme-color"]');
+            if (meta) meta.setAttribute('content', THEMES[theme].meta);
+        }
+
+        function setTheme(theme) {
+            if (!THEMES[theme]) return;
+            var root = document.documentElement;
+            root.setAttribute('data-theme', theme);
+            root.setAttribute('data-style', theme === 'pixel' || theme === 'pocket' ? 'pixel' : 'flat');
+            try { localStorage.setItem('theme', theme); } catch (e) { }
+            updateSkillColors(THEMES[theme].tone);
+            syncUi(theme);
+            document.dispatchEvent(new CustomEvent('themechange', { detail: { theme: theme } }));
+        }
+
+        function openMenu() {
+            menu.hidden = false;
+            btn.setAttribute('aria-expanded', 'true');
+            var checked = menu.querySelector('[aria-checked="true"]') || options[0];
+            checked.focus();
+        }
+
+        function closeMenu(returnFocus) {
+            if (menu.hidden) return;
+            menu.hidden = true;
+            btn.setAttribute('aria-expanded', 'false');
+            if (returnFocus) btn.focus();
+        }
+
+        btn.addEventListener('click', function () {
+            if (menu.hidden) openMenu(); else closeMenu(false);
+        });
+
+        options.forEach(function (o) {
+            o.addEventListener('click', function () {
+                setTheme(o.getAttribute('data-theme-value'));
+                closeMenu(true);
+            });
+        });
+
+        menu.addEventListener('keydown', function (e) {
+            var i = options.indexOf(document.activeElement);
+            if (e.key === 'ArrowDown') { e.preventDefault(); options[(i + 1) % options.length].focus(); }
+            else if (e.key === 'ArrowUp') { e.preventDefault(); options[(i - 1 + options.length) % options.length].focus(); }
+            else if (e.key === 'Escape') { e.stopPropagation(); closeMenu(true); }
+        });
+
+        document.addEventListener('click', function (e) {
+            if (!picker.contains(e.target)) closeMenu(false);
+        });
+
+        // 하위 호환: 예전 인라인 핸들러(toggleTheme)를 부르는 곳이 남아 있어도 동작하게 한다.
+        window.setTheme = setTheme;
+        window.toggleTheme = function () {
+            var keys = Object.keys(THEMES);
+            setTheme(keys[(keys.indexOf(current()) + 1) % keys.length]);
+        };
+
+        syncUi(current());
+        document.addEventListener('DOMContentLoaded', function () {
+            updateSkillColors(THEMES[current()].tone);
+        });
+    })();
+</script>

@@ -62,10 +62,23 @@
     {%- endcomment -%}
     <script>
         (function () {
-            var saved = localStorage.getItem("theme") || "light";
-            document.documentElement.setAttribute("data-theme", saved);
+            // theme-switcher.html 의 THEMES 목록과 맞춰야 한다.
+            var valid = { light: 1, dark: 1, pixel: 1, pocket: 1 };
+            var saved = null;
+            try { saved = localStorage.getItem("theme"); } catch (e) { }
+            if (!valid[saved]) saved = "light";
+            var root = document.documentElement;
+            root.setAttribute("data-theme", saved);
+            root.setAttribute("data-style", saved === "pixel" || saved === "pocket" ? "pixel" : "flat");
         })();
     </script>
 
+    {%- comment -%}
+    Galmuri — 한글을 지원하는 픽셀 폰트(OFL). 8-Bit/Pocket 테마와 아케이드에서만 실제로 쓰이며,
+    @font-face는 해당 글꼴이 화면에 쓰일 때에만 파일을 내려받는다.
+    {%- endcomment -%}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/galmuri@2.40.3/dist/galmuri.css">
+
     {% include project-style.html %}
+    {% include theme-style.html %}
 </head>

@@ -3,38 +3,13 @@
 {% include head.html %}
 
 <body>
-    <button class="theme-switch" onclick="toggleTheme()" id="themeBtn" title="테마 변경" aria-label="라이트/다크 테마 전환">🌓</button>
+    {% include theme-switcher.html %}
 
     <section>
         {{ content }}
     </section>
 
     {% include review-script.html %}
-    <script>
-        function updateSkillColors(theme) {
-            document.querySelectorAll('.skill-gauge-bar, .skill-gauge-label').forEach(function (el) {
-                var color = theme === 'dark' ? el.getAttribute('data-dark') : el.getAttribute('data-light');
-                if (!color) return;
-                if (el.classList.contains('skill-gauge-bar')) {
-                    el.setAttribute('stroke', color);
-                } else {
-                    el.style.color = color;
-                }
-            });
-        }
-
-        function toggleTheme() {
-            var current = document.documentElement.getAttribute("data-theme");
-            var target = current === "dark" ? "light" : "dark";
-            document.documentElement.setAttribute("data-theme", target);
-            localStorage.setItem("theme", target);
-            updateSkillColors(target);
-        }
-
-        document.addEventListener("DOMContentLoaded", function () {
-            updateSkillColors(document.documentElement.getAttribute("data-theme"));
-        });
-    </script>
 </body>
 
 </html>

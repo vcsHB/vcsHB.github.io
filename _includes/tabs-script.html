@@ -26,6 +26,9 @@
         }
 
         if (tabName === 'Profile') loadProfileReadme();
+
+        // 아케이드처럼 탭 표시 여부에 반응해야 하는 모듈을 위한 알림.
+        document.dispatchEvent(new CustomEvent('tabchange', { detail: { tab: tabName } }));
     }
 
     // 사용자 클릭 진입점 — 여기서만 히스토리를 쌓는다.
