@@ -1,5 +1,5 @@
 /*
- * BUG HUNT — 포트폴리오 Arcade 탭의 미니 탄막 슈팅.
+ * Tofu Project — 포트폴리오 Arcade > Danmaku 탭의 미니 탄막 슈팅.
  *
  * - 내부 해상도 240x320 캔버스를 CSS로 확대(pixelated)해 도트 느낌을 낸다.
  * - 색은 전부 CSS 변수(--game-*)에서 읽으므로 사이트 테마를 바꾸면 스프라이트도 다시 칠해진다.
@@ -21,7 +21,8 @@
     var ui = {
         score: $('arcadeScore'), hi: $('arcadeHi'), lives: $('arcadeLives'), bombs: $('arcadeBombs'),
         overlay: $('arcadeOverlay'), banner: $('arcadeBanner'), boss: $('arcadeBoss'),
-        bossName: $('arcadeBossName'), bossHp: $('arcadeBossHp'), bombBtn: $('arcadeBombBtn')
+        bossName: $('arcadeBossName'), bossHp: $('arcadeBossHp'), bombBtn: $('arcadeBombBtn'),
+        diff: $('arcadeDiff')
     };
 
     function load(k, d) { try { var v = localStorage.getItem(k); return v == null ? d : v; } catch (e) { return d; } }
@@ -185,8 +186,39 @@
     // ------------------------------------------------------------------
     // 게임 상태
     // ------------------------------------------------------------------
+    // ------------------------------------------------------------------
+    // 난이도 — speed: 탄속 배율, dens: 탄 밀도 배율, extra: 잔챙이 조준탄 추가 갈래
+    // ------------------------------------------------------------------
+    var DIFFS = {
+        easy: {
+            name: 'EASY', sub: '초보자에게 권장합니다', desc: 'test Desc1',
+            color: '--diff-easy', speed: 0.75, dens: 0.6, extra: 0, lives: 5, bombs: 3
+        },
+        normal: {
+            name: 'NORMAL', sub: '무난한 난이도입니다.', desc: 'test Desc2',
+            color: '--diff-normal', speed: 1, dens: 1, extra: 0, lives: 3, bombs: 2
+        },
+        hard: {
+            name: 'HARD', sub: '쉽지 않은 난이도입니다.', desc: 'test Desc3',
+            color: '--diff-hard', speed: 1.15, dens: 1.35, extra: 1, lives: 3, bombs: 2
+        },
+        lunatic: {
+            name: 'LUNATIC', sub: '힘듭니다.', desc: 'test Desc4',
+            color: '--diff-lunatic', speed: 1.3, dens: 1.8, extra: 2, lives: 3, bombs: 2
+        }
+    };
+    var DIFF_ORDER = ['easy', 'normal', 'hard', 'lunatic'];
+    var diffId = load('tofu-diff', 'normal');
+    if (!DIFFS[diffId]) diffId = 'normal';
+    var DIFF = DIFFS[diffId];
+
+    // 탄 개수를 난이도에 맞춰 늘리고 줄인다. 조준탄 부채꼴은 가운데 줄이 있도록 홀수로 맞춘다.
+    function dn(n) { return Math.max(1, Math.round(n * DIFF.dens)); }
+    function odd(n) { n = dn(n); return n % 2 ? n : n + 1; }
+    function every(t, interval) { return t % Math.max(2, Math.round(interval / DIFF.dens)) === 0; }
+
     var state = 'title';
-    var hi = parseInt(load('bughunt-hi', '0'), 10) || 0;
+    var hi = 0;
     var score, lives, bombs, power, graze, loop, kills, frame, flash, shake;
     var player, shots, foes, bullets, items, fx, boss, director;
     var bannerT = 0;
@@ -198,12 +230,12 @@
         stars.push({ x: Math.random() * W, y: Math.random() * H, s: 0.3 + Math.random() * 1.2 });
     }
 
-    function rank() { return 1 + loop * 0.15; }
+    function rank() { return DIFF.speed * (1 + loop * 0.15); }
     function aim(x, y) { return Math.atan2(player.y - y, player.x - x); }
     function rand(a, b) { return a + Math.random() * (b - a); }
 
     function reset() {
-        score = 0; lives = 3; bombs = 2; power = 1; graze = 0; loop = 0; kills = 0;
+        score = 0; lives = DIFF.lives; bombs = DIFF.bombs; power = 1; graze = 0; loop = 0; kills = 0;
         frame = 0; flash = 0; shake = 0;
         player = { x: W / 2, y: H - 36, inv: 90 };
         shots = []; foes = []; bullets = []; items = []; fx = []; boss = null;
@@ -273,12 +305,13 @@
     // 위에서 내려와 옆으로 휘어 빠져나가는 잔챙이
     function spawnSwoop(x, dir) {
         addFoe({
-            x: x, y: -8, a: Math.PI / 2, hp: 3, r: 5, spr: 'bug', score: 100,
+            x: x, y: -8, a: Math.PI / 2, hp: 3, r: 5, spr: 'bug', score: 100, seed: Math.random(),
             update: function (e) {
                 if (e.t > 26) e.a = Math.max(0.15, Math.min(Math.PI - 0.15, e.a - dir * 0.035));
                 e.x += Math.cos(e.a) * 2.1;
                 e.y += Math.sin(e.a) * 2.1;
-                if (e.t === 34) fan(e.x, e.y, 1 + Math.min(loop, 2) * 2, 0.22, 1.9 * rank(), 2, 'bullet-a');
+                // EASY에서는 절반만 쏜다
+                if (e.t === 34 && (DIFF.dens >= 1 || e.seed < 0.5)) fan(e.x, e.y, 1 + Math.min(loop + DIFF.extra, 3) * 2, 0.22, 1.9 * rank(), 2, 'bullet-a');
             }
         });
     }
@@ -289,7 +322,7 @@
             x: x, y: -8, hp: 5, r: 5, spr: 'bug', score: 150,
             update: function (e) {
                 e.y += 0.75;
-                if (e.t % 64 === 30 && e.y < H * 0.6) fan(e.x, e.y, 3, 0.25, 1.6 * rank(), 2, 'bullet-b');
+                if (e.t % 64 === 30 && e.y < H * 0.6) fan(e.x, e.y, odd(3), 0.25, 1.6 * rank(), 2, 'bullet-b');
             }
         });
     }
@@ -302,9 +335,9 @@
                 if (e.t < 300) e.y += (e.ty - e.y) * 0.05;
                 else e.y -= 1.4;
                 if (e.t > 40 && e.t < 300 && e.t % 48 === 0) {
-                    ring(e.x, e.y, 12 + loop * 2, 1.15 * rank(), e.t * 0.05, 3, 'bullet-a');
+                    ring(e.x, e.y, dn(12) + loop * 2, 1.15 * rank(), e.t * 0.05, 3, 'bullet-a');
                 }
-                if (e.t > 40 && e.t < 300 && e.t % 48 === 24) fan(e.x, e.y, 3, 0.12, 2 * rank(), 2, 'bullet-b');
+                if (e.t > 40 && e.t < 300 && e.t % 48 === 24) fan(e.x, e.y, odd(3), 0.12, 2 * rank(), 2, 'bullet-b');
             }
         });
     }
@@ -327,18 +360,18 @@
             fire: function (b, t) {
                 b.x = W / 2 + Math.sin(t / 90) * 40;
                 if (t % 4 === 0) {
-                    var a = t * 0.13;
-                    for (var k = 0; k < 3; k++) shoot(b.x, b.y + 4, a + k * TAU / 3, 1.5 * rank(), 3, 'bullet-a');
+                    var a = t * 0.13, arms = Math.max(2, dn(3));
+                    for (var k = 0; k < arms; k++) shoot(b.x, b.y + 4, a + k * TAU / arms, 1.5 * rank(), 3, 'bullet-a');
                 }
-                if (t % 80 === 40) fan(b.x, b.y, 5 + loop, 0.2, 2.1 * rank(), 2, 'bullet-b');
+                if (t % 80 === 40) fan(b.x, b.y, odd(5) + loop * 2, 0.2, 2.1 * rank(), 2, 'bullet-b');
             }
         },
         {
             name: 'STACK OVERFLOW · HEAP SPRAY', hp: 280,
             fire: function (b, t) {
                 b.x = W / 2 + Math.sin(t / 60) * 70;
-                if (t % 28 === 0) ring(b.x, b.y, 18 + loop * 2, 1.3 * rank(), (t / 28) % 2 * Math.PI / 18, 3, 'bullet-b');
-                if (t % 7 === 0) shoot(b.x + rand(-20, 20), b.y + 6, Math.PI / 2 + rand(-0.7, 0.7), rand(1.4, 2.2) * rank(), 2, 'bullet-a');
+                if (t % 28 === 0) ring(b.x, b.y, dn(18) + loop * 2, 1.3 * rank(), (t / 28) % 2 * Math.PI / 18, 3, 'bullet-b');
+                if (every(t, 7)) shoot(b.x + rand(-20, 20), b.y + 6, Math.PI / 2 + rand(-0.7, 0.7), rand(1.4, 2.2) * rank(), 2, 'bullet-a');
             }
         },
         {
@@ -347,10 +380,10 @@
                 b.x += (W / 2 + Math.sin(t / 120) * 30 - b.x) * 0.05;
                 // 퍼졌다가 멈춘 뒤, 플레이어를 향해 다시 날아오는 꽃잎 탄
                 if (t % 72 === 10) {
-                    ring(b.x, b.y, 20 + loop * 2, 3.2, t * 0.07, 3, 'bullet-a',
+                    ring(b.x, b.y, dn(20) + loop * 2, 3.2, t * 0.07, 3, 'bullet-a',
                         { acc: -0.06, min: 0.05, reAt: 55, reS: 1.9 * rank() });
                 }
-                if (t % 144 > 72 && t % 5 === 0) {
+                if (t % 144 > 72 && every(t, 5)) {
                     var a = t * 0.09;
                     shoot(b.x, b.y, a, 1.3 * rank(), 2, 'bullet-b', { av: 0.007 });
                     shoot(b.x, b.y, a + Math.PI, 1.3 * rank(), 2, 'bullet-b', { av: -0.007 });
@@ -399,7 +432,7 @@
 
     function* stageScript() {
         while (true) {
-            banner(loop === 0 ? 'READY' : 'LOOP ' + (loop + 1), loop === 0 ? '버그를 잡아라!' : '버그가 더 강해졌다', 110);
+            banner(loop === 0 ? DIFF.name : 'LOOP ' + (loop + 1), loop === 0 ? DIFF.sub : '버그가 더 강해졌다', 110);
             yield* wait(100);
 
             for (var k = 0; k < 6; k++) { spawnSwoop(44, 1); yield* wait(14); }
@@ -452,7 +485,7 @@
         shake = 14; flash = 10;
         power = Math.max(1, power - 1);
         if (lives <= 0) return gameOver();
-        bombs = Math.max(bombs, 2);
+        bombs = Math.max(bombs, DIFF.bombs);
         player.x = W / 2; player.y = H - 36; player.inv = 150;
     }
 
@@ -478,8 +511,8 @@
         if (player.inv > 0) player.inv--;
         if (player.bombCd > 0) player.bombCd--;
 
-        // 자동 사격
-        if (frame % 5 === 0) {
+        // 사격: 키보드는 Z를 누르고 있는 동안, 터치 기기는 자동
+        if ((keys.z || autoFire) && frame % 5 === 0) {
             var spread = focus ? 0.05 : 0.17;
             shots.push({ x: player.x - 3, y: player.y - 6, a: 0 }, { x: player.x + 3, y: player.y - 6, a: 0 });
             if (power >= 2) shots.push({ x: player.x - 5, y: player.y - 2, a: -spread }, { x: player.x + 5, y: player.y - 2, a: spread });
@@ -617,10 +650,7 @@
             ctx.fillRect(Math.round(s.x), Math.round(s.y), 1, s.s > 1 ? 2 : 1);
         });
 
-        if (state === 'title') {
-            blit(SPR.player, W / 2, H - 36 + Math.round(Math.sin(Date.now() / 300) * 2));
-            return drawFlash();
-        }
+        if (state === 'title') return drawFlash();
 
         items.forEach(function (it) {
             if (it.type === 'mini') { ctx.fillStyle = PAL.player; ctx.fillRect(Math.round(it.x) - 1, Math.round(it.y) - 1, 2, 2); }
@@ -650,8 +680,11 @@
             if (frame % 4 < 2) { ctx.fillStyle = PAL['bullet-a']; ctx.fillRect(Math.round(player.x) - 1, Math.round(player.y) + 4, 1, 2); ctx.fillRect(Math.round(player.x) + 1, Math.round(player.y) + 4, 1, 2); }
         }
 
+        // 자기 탄은 적 탄을 가리지 않도록 반투명하게
         ctx.fillStyle = PAL.shot;
-        shots.forEach(function (s) { ctx.fillRect(Math.round(s.x) - 1, Math.round(s.y) - 3, 2, 6); });
+        ctx.globalAlpha = 0.35;
+        shots.forEach(function (s) { ctx.fillRect(Math.round(s.x) - 1, Math.round(s.y) - 2, 2, 5); });
+        ctx.globalAlpha = 1;
 
         bullets.forEach(function (b) { blit(ORB[b.c][b.r], b.x, b.y); });
 
@@ -708,26 +741,45 @@
     // ------------------------------------------------------------------
     // 상태 전환 & 오버레이
     // ------------------------------------------------------------------
-    function showOverlay(html) {
+    function hiKey(d) { return 'tofu-hi-' + d; }
+    function hiOf(d) { return parseInt(load(hiKey(d), '0'), 10) || 0; }
+
+    function showOverlay(html, focusSel) {
         ui.overlay.innerHTML = html;
         ui.overlay.hidden = false;
-        var btn = ui.overlay.querySelector('button');
+        var btn = ui.overlay.querySelector(focusSel || 'button');
         if (btn && panel.classList.contains('active')) btn.focus({ preventScroll: true });
     }
 
     function titleScreen() {
         state = 'title';
+        ui.boss.hidden = true;
+        hideBanner();
+        var list = DIFF_ORDER.map(function (id) {
+            var d = DIFFS[id];
+            return '<button type="button" class="arcade-diff" data-action="start" data-diff="' + id + '" style="--diff-color:var(' + d.color + ')">' +
+                '<span class="arcade-diff-name">' + d.name + '</span>' +
+                '<span class="arcade-diff-hi">HI ' + hiOf(id) + '</span>' +
+                '<span class="arcade-diff-sub">' + d.sub + '</span>' +
+                '<span class="arcade-diff-desc">' + d.desc + '</span>' +
+                '</button>';
+        }).join('');
         showOverlay(
-            '<p class="arcade-kicker">INSERT COIN</p>' +
-            '<h3 class="arcade-title">BUG HUNT</h3>' +
-            '<p class="arcade-desc">코드 속에 숨어든 버그를 소탕하라.<br>그 끝엔 STACK OVERFLOW가 기다린다.</p>' +
-            '<button type="button" class="arcade-btn" data-action="start">▶ START</button>' +
-            '<p class="arcade-hint">Enter · Space 로 시작 / 모바일은 드래그</p>'
+            '<h3 class="arcade-title">Tofu Project</h3>' +
+            '<p class="arcade-subtitle">～ Bug Hunt in the Stack ～</p>' +
+            '<p class="arcade-kicker">SELECT DIFFICULTY</p>' +
+            '<div class="arcade-diffs">' + list + '</div>' +
+            '<p class="arcade-hint">↑↓ 선택 · Z 결정</p>',
+            '.arcade-diff[data-diff="' + diffId + '"]'
         );
-        setText(ui.hi, 'h', String(hi));
+        setText(ui.hi, 'h', String(hiOf(diffId)));
     }
 
-    function start() {
+    function start(id) {
+        if (DIFFS[id]) { diffId = id; DIFF = DIFFS[id]; save('tofu-diff', id); }
+        hi = hiOf(diffId);
+        ui.diff.textContent = DIFF.name;
+        ui.diff.style.setProperty('--diff-color', 'var(' + DIFF.color + ')');
         reset();
         state = 'playing';
         ui.overlay.hidden = true;
@@ -741,9 +793,9 @@
         drag = null;
         showOverlay(
             '<h3 class="arcade-title">PAUSED</h3>' +
-            '<p class="arcade-stats">SCORE <b>' + score + '</b> · GRAZE <b>' + graze + '</b></p>' +
+            '<p class="arcade-stats">' + DIFF.name + ' · SCORE <b>' + score + '</b> · GRAZE <b>' + graze + '</b></p>' +
             '<button type="button" class="arcade-btn" data-action="resume">▶ CONTINUE</button>' +
-            '<button type="button" class="arcade-btn" data-action="title" style="background:var(--game-grid);color:var(--text-color)">QUIT</button>'
+            '<button type="button" class="arcade-btn arcade-btn-sub" data-action="title">난이도 선택으로</button>'
         );
     }
 
@@ -760,35 +812,47 @@
         drag = null;
         ui.boss.hidden = true;
         hideBanner();
-        var prev = parseInt(load('bughunt-hi', '0'), 10) || 0;
-        var record = score > prev;
-        if (record) save('bughunt-hi', String(score));
+        var record = score > hiOf(diffId);
+        if (record) save(hiKey(diffId), String(score));
         drawHud();
         showOverlay(
             '<h3 class="arcade-title">GAME OVER</h3>' +
             (record ? '<p class="arcade-record">★ NEW RECORD ★</p>' : '') +
-            '<p class="arcade-stats">SCORE <b>' + score + '</b><br>GRAZE <b>' + graze + '</b> · LOOP <b>' + (loop + 1) + '</b> · BUGS <b>' + kills + '</b></p>' +
-            '<button type="button" class="arcade-btn" data-action="start">↻ RETRY</button>'
+            '<p class="arcade-stats">' + DIFF.name + ' — ' + DIFF.sub + '<br>SCORE <b>' + score + '</b><br>GRAZE <b>' + graze + '</b> · LOOP <b>' + (loop + 1) + '</b> · BUGS <b>' + kills + '</b></p>' +
+            '<button type="button" class="arcade-btn" data-action="start">↻ RETRY</button>' +
+            '<button type="button" class="arcade-btn arcade-btn-sub" data-action="title">난이도 선택으로</button>'
         );
     }
+
+    function backToTitle() { reset(); titleScreen(); }
 
     ui.overlay.addEventListener('click', function (e) {
         var btn = e.target.closest('button[data-action]');
         if (!btn) return;
         var act = btn.getAttribute('data-action');
-        if (act === 'start') start();
+        if (act === 'start') start(btn.getAttribute('data-diff') || diffId);
         else if (act === 'resume') resume();
-        else if (act === 'title') { reset(); titleScreen(); }
+        else if (act === 'title') backToTitle();
     });
 
+    // 오버레이 안 버튼들을 화살표로 오간다.
+    function moveFocus(step) {
+        var btns = Array.prototype.slice.call(ui.overlay.querySelectorAll('button'));
+        if (!btns.length) return;
+        var i = btns.indexOf(document.activeElement);
+        btns[(i + step + btns.length) % btns.length].focus({ preventScroll: true });
+    }
+
     // ------------------------------------------------------------------
-    // 입력
+    // 입력 — 키보드는 화살표 + Z(사격) / Shift(정밀) / X(폭탄)
     // ------------------------------------------------------------------
     var KEYMAP = {
-        ArrowLeft: 'l', KeyA: 'l', ArrowRight: 'r', KeyD: 'r',
-        ArrowUp: 'u', KeyW: 'u', ArrowDown: 'd', KeyS: 'd',
-        ShiftLeft: 'f', ShiftRight: 'f', KeyX: 'b', KeyK: 'b'
+        ArrowLeft: 'l', ArrowRight: 'r', ArrowUp: 'u', ArrowDown: 'd',
+        ShiftLeft: 'f', ShiftRight: 'f', KeyZ: 'z', KeyX: 'b'
     };
+
+    // 터치 기기에서는 쏘는 버튼을 누를 손이 없으므로 자동 사격.
+    var autoFire = !!(window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
 
     window.addEventListener('keydown', function (e) {
         if (!running) return;
@@ -799,6 +863,7 @@
             var k = KEYMAP[e.code];
             if (k) {
                 e.preventDefault();
+                autoFire = false;
                 if (k === 'b') { if (!e.repeat) useBomb(); }
                 else keys[k] = true;
             } else if (e.code === 'Escape' || e.code === 'KeyP') {
@@ -806,14 +871,22 @@
             } else if (e.code === 'Space') {
                 e.preventDefault();
             }
-        } else if (state === 'paused') {
-            if (e.code === 'Escape' || e.code === 'KeyP') { e.preventDefault(); resume(); }
-        } else if (e.code === 'Enter' || e.code === 'Space' || e.code === 'KeyZ') {
-            // 버튼 위에서는 브라우저 기본 click이 처리하므로 중복 시작을 막는다.
-            if (t && t.tagName === 'BUTTON') return;
-            if (!panel.contains(document.activeElement)) return;
+            return;
+        }
+
+        // 메뉴 조작은 포커스가 게임 패널 안에 있을 때만 가로챈다(페이지 스크롤 방해 방지).
+        if (!panel.contains(document.activeElement)) return;
+
+        if (e.code === 'ArrowUp' || e.code === 'ArrowLeft') { e.preventDefault(); moveFocus(-1); }
+        else if (e.code === 'ArrowDown' || e.code === 'ArrowRight') { e.preventDefault(); moveFocus(1); }
+        else if (e.code === 'KeyZ') {
+            // Z는 포커스된 버튼을 누르는 결정 키
             e.preventDefault();
-            start();
+            if (!e.repeat && t && t.tagName === 'BUTTON' && ui.overlay.contains(t)) t.click();
+        } else if (e.code === 'Escape' || e.code === 'KeyP') {
+            e.preventDefault();
+            if (state === 'paused') resume();
+            else if (state === 'over') backToTitle();
         }
     });
 
@@ -827,6 +900,7 @@
     // 터치/마우스 드래그: 손가락 이동량만큼 기체를 상대 이동시킨다(손가락에 기체가 가려지지 않도록).
     canvas.addEventListener('pointerdown', function (e) {
         if (state !== 'playing') return;
+        if (e.pointerType !== 'mouse') autoFire = true;
         drag = { id: e.pointerId, x: e.clientX, y: e.clientY };
         try { canvas.setPointerCapture(e.pointerId); } catch (err) { }
         e.preventDefault();
@@ -844,7 +918,7 @@
     canvas.addEventListener('pointerup', endDrag);
     canvas.addEventListener('pointercancel', endDrag);
 
-    ui.bombBtn.addEventListener('pointerdown', function (e) { e.preventDefault(); useBomb(); });
+    ui.bombBtn.addEventListener('pointerdown', function (e) { e.preventDefault(); autoFire = true; useBomb(); });
 
     // ------------------------------------------------------------------
     // 루프 — Arcade 탭이 보일 때만 돈다

@@ -4,7 +4,7 @@
        - data-theme : light | dark | pixel | pocket  (색 토큰)
        - data-style : flat | pixel                   (형태 규칙)
        색과 형태를 분리해 두어, 픽셀 계열 테마를 추가할 때 토큰만 정의하면 된다.
-       --game-* 토큰은 아케이드(BUG HUNT) 캔버스가 읽어 스프라이트를 다시 칠한다.
+       --game-* 토큰은 아케이드(Tofu Project) 캔버스가 읽어 스프라이트를 다시 칠한다.
        ===================================================================== */
 
     :root {
@@ -17,6 +17,12 @@
         --game-core: #ffffff;
         --game-shot: #0366d6;
         --pixel-font: "Galmuri11", "Galmuri9", ui-monospace, monospace;
+
+        /* 아케이드 난이도 색 — 테마와 무관하게 구분되도록 고정 */
+        --diff-easy: #3fbf6f;
+        --diff-normal: #3d8bff;
+        --diff-hard: #ff9a3c;
+        --diff-lunatic: #e8457a;
     }
 
     [data-theme='dark'] {
@@ -82,6 +88,11 @@
         --game-bullet-b: #306230;
         --game-core: #9bbc0f;
         --game-shot: #306230;
+
+        --diff-easy: #306230;
+        --diff-normal: #306230;
+        --diff-hard: #0f380f;
+        --diff-lunatic: #0f380f;
     }
 
     /* ---------- 테마 선택기 ---------- */
