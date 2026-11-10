@@ -192,19 +192,19 @@
     var DIFFS = {
         easy: {
             name: 'EASY', sub: '초보자에게 권장합니다', desc: 'test Desc1',
-            color: '--diff-easy', speed: 0.75, dens: 0.6, extra: 0, lives: 5, bombs: 3
+            color: '--diff-easy', speed: 0.6, dens: 0.4, extra: 0, lives: 5, bombs: 3, hpMul: 0.8
         },
         normal: {
             name: 'NORMAL', sub: '무난한 난이도입니다.', desc: 'test Desc2',
-            color: '--diff-normal', speed: 1, dens: 1, extra: 0, lives: 3, bombs: 2
+            color: '--diff-normal', speed: 0.8, dens: 0.7, extra: 0, lives: 4, bombs: 3, hpMul: 0.9
         },
         hard: {
             name: 'HARD', sub: '쉽지 않은 난이도입니다.', desc: 'test Desc3',
-            color: '--diff-hard', speed: 1.15, dens: 1.35, extra: 1, lives: 3, bombs: 2
+            color: '--diff-hard', speed: 1, dens: 1, extra: 1, lives: 3, bombs: 2, hpMul: 1
         },
         lunatic: {
             name: 'LUNATIC', sub: '힘듭니다.', desc: 'test Desc4',
-            color: '--diff-lunatic', speed: 1.3, dens: 1.8, extra: 2, lives: 3, bombs: 2
+            color: '--diff-lunatic', speed: 1.2, dens: 1.5, extra: 2, lives: 3, bombs: 2, hpMul: 1.1
         }
     };
     var DIFF_ORDER = ['easy', 'normal', 'hard', 'lunatic'];
@@ -297,7 +297,7 @@
     // ------------------------------------------------------------------
     function addFoe(o) {
         o.t = 0; o.hit = 0;
-        o.hp = Math.round(o.hp * (1 + loop * 0.35));
+        o.hp = Math.max(1, Math.round(o.hp * DIFF.hpMul * (1 + loop * 0.3)));
         foes.push(o);
         return o;
     }
@@ -305,13 +305,13 @@
     // 위에서 내려와 옆으로 휘어 빠져나가는 잔챙이
     function spawnSwoop(x, dir) {
         addFoe({
-            x: x, y: -8, a: Math.PI / 2, hp: 3, r: 5, spr: 'bug', score: 100, seed: Math.random(),
+            x: x, y: -8, a: Math.PI / 2, hp: 2, r: 5, spr: 'bug', score: 100, seed: Math.random(),
             update: function (e) {
                 if (e.t > 26) e.a = Math.max(0.15, Math.min(Math.PI - 0.15, e.a - dir * 0.035));
                 e.x += Math.cos(e.a) * 2.1;
                 e.y += Math.sin(e.a) * 2.1;
-                // EASY에서는 절반만 쏜다
-                if (e.t === 34 && (DIFF.dens >= 1 || e.seed < 0.5)) fan(e.x, e.y, 1 + Math.min(loop + DIFF.extra, 3) * 2, 0.22, 1.9 * rank(), 2, 'bullet-a');
+                // 낮은 난이도에서는 일부만 쏜다
+                if (e.t === 34 && e.seed < DIFF.dens) fan(e.x, e.y, 1 + Math.min(loop + DIFF.extra, 3) * 2, 0.22, 1.9 * rank(), 2, 'bullet-a');
             }
         });
     }
@@ -319,7 +319,7 @@
     // 천천히 내려오며 조준 3-way
     function spawnDrift(x) {
         addFoe({
-            x: x, y: -8, hp: 5, r: 5, spr: 'bug', score: 150,
+            x: x, y: -8, hp: 3, r: 5, spr: 'bug', score: 150,
             update: function (e) {
                 e.y += 0.75;
                 if (e.t % 64 === 30 && e.y < H * 0.6) fan(e.x, e.y, odd(3), 0.25, 1.6 * rank(), 2, 'bullet-b');
@@ -330,7 +330,7 @@
     // 자리를 잡고 원형 탄을 뿌리는 중형 — 반드시 P 아이템을 떨어뜨린다
     function spawnHover(tx, ty) {
         addFoe({
-            x: tx, y: -12, ty: ty, hp: 28, r: 7, spr: 'glitch', score: 800, drop: 'power',
+            x: tx, y: -12, ty: ty, hp: 16, r: 7, spr: 'glitch', score: 800, drop: 'power',
             update: function (e) {
                 if (e.t < 300) e.y += (e.ty - e.y) * 0.05;
                 else e.y -= 1.4;
@@ -356,10 +356,10 @@
     // ------------------------------------------------------------------
     var PHASES = [
         {
-            name: 'STACK OVERFLOW · RECURSION', hp: 240,
+            name: 'STACK OVERFLOW · RECURSION', hp: 130,
             fire: function (b, t) {
                 b.x = W / 2 + Math.sin(t / 90) * 40;
-                if (t % 4 === 0) {
+                if (every(t, 4)) {
                     var a = t * 0.13, arms = Math.max(2, dn(3));
                     for (var k = 0; k < arms; k++) shoot(b.x, b.y + 4, a + k * TAU / arms, 1.5 * rank(), 3, 'bullet-a');
                 }
@@ -367,7 +367,7 @@
             }
         },
         {
-            name: 'STACK OVERFLOW · HEAP SPRAY', hp: 280,
+            name: 'STACK OVERFLOW · HEAP SPRAY', hp: 150,
             fire: function (b, t) {
                 b.x = W / 2 + Math.sin(t / 60) * 70;
                 if (t % 28 === 0) ring(b.x, b.y, dn(18) + loop * 2, 1.3 * rank(), (t / 28) % 2 * Math.PI / 18, 3, 'bullet-b');
@@ -375,7 +375,7 @@
             }
         },
         {
-            name: 'STACK OVERFLOW · SEGFAULT', hp: 320,
+            name: 'STACK OVERFLOW · SEGFAULT', hp: 170,
             fire: function (b, t) {
                 b.x += (W / 2 + Math.sin(t / 120) * 30 - b.x) * 0.05;
                 // 퍼졌다가 멈춘 뒤, 플레이어를 향해 다시 날아오는 꽃잎 탄
@@ -402,7 +402,7 @@
         boss.phase++;
         if (boss.phase >= PHASES.length) return defeatBoss();
         var p = PHASES[boss.phase];
-        boss.hp = boss.maxHp = Math.round(p.hp * (1 + loop * 0.3));
+        boss.hp = boss.maxHp = Math.round(p.hp * DIFF.hpMul * (1 + loop * 0.25));
         boss.t = -70; // 페이즈 전환 직후 잠깐 숨 돌릴 틈
         ui.bossName.textContent = p.name;
         if (boss.phase > 0) {
